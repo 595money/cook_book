@@ -17,7 +17,8 @@
 # %%
 import pandas as pd
 from jupyterthemes import jtplot
-
+from IPython.core.display import display, HTML
+display(HTML("<style>.container { width:70% !important; }</style>"))
 jtplot.style()
 
 # %%
@@ -218,6 +219,7 @@ missing_data_drop.to_csv('./source/car_sales_droped.csv')
 
 # %%
 # Column from series
+# 由於使用 series 來產生 Column 
 seats_column = pd.Series([5, 5, 5, 5, 5])
 
 # New column called seats
@@ -231,8 +233,27 @@ car_sales
 
 # %%
 # Column from Python list
+# 由於是 list 所以長度必須完全相同，不可以有missing data
 fuel_economy = [7.5, 9.2, 5.0, 9.6, 8.7, 4.7, 7.6, 8.7, 3.0, 4.5]
 car_sales['Fuel per 100KM'] = fuel_economy
+car_sales
+
+# %%
+car_sales['Total fuel used'] = car_sales['Odometer (KM)'] / 100 * car_sales['Fuel per 100KM']
+
+# %%
+car_sales
+
+# %%
+# Create a column from a single value
+car_sales['Number of wheels'] = 4
+car_sales
+
+# %%
+car_sales['Passed road saftey'] = True
+car_sales.dtypes
+
+# %%
 car_sales
 
 # %%
