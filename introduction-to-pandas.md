@@ -260,5 +260,6 @@ missing_data_drop.to_csv('./source/car_sales_droped.csv')
 
 ```python
 # Column from series
-
+# test by notebook
 ```
+
