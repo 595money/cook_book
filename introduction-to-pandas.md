@@ -17,6 +17,7 @@ jupyter:
 ```python
 import pandas as pd
 from jupyterthemes import jtplot
+
 jtplot.style()
 ```
 
@@ -65,7 +66,8 @@ exported_car_sales
 ```
 
 ```python
-heart_disease = pd.read_csv("https://raw.githubusercontent.com/mrdbourke/zero-to-mastery-ml/master/data/heart-disease.csv")
+heart_disease = pd.read_csv(
+    "https://raw.githubusercontent.com/mrdbourke/zero-to-mastery-ml/master/data/heart-disease.csv")
 heart_disease
 ```
 
@@ -76,7 +78,7 @@ heart_disease
 ```python
 # Series has arg (data, index)
 user_names = ['Simon', 'Belinda', 'Troll']
-user_hight = [170 , 154, 6]
+user_hight = [170, 154, 6]
 user_width = [65, 50, 0.013]
 users_h = pd.Series(data=user_hight, index=user_names)
 users_w = pd.Series(data=user_width, index=user_names)
@@ -84,7 +86,7 @@ users_w = pd.Series(data=user_width, index=user_names)
 
 ```python
 # Series 引數可以dict
-user = pd.Series({'name' : 'Simon', 'age' : 32 })
+user = pd.Series({'name': 'Simon', 'age': 32})
 user
 ```
 
@@ -96,8 +98,8 @@ user
 
 ```python
 # DataFrame has arg (index, data, columns)
-users = pd.DataFrame({'Hight':users_h, 'Width':users_w})
-users['BMI'] = users['Width'] / ((users['Hight'] / 100) ** 2) 
+users = pd.DataFrame({'Hight': users_h, 'Width': users_w})
+users['BMI'] = users['Width'] / ((users['Hight'] / 100) ** 2)
 users
 ```
 
@@ -192,7 +194,7 @@ car_sales[car_sales['Make'] == 'Toyota']
 ```
 
 ```python
-car_sales[car_sales['Odometer (KM)'] > 100000 ]
+car_sales[car_sales['Odometer (KM)'] > 100000]
 ```
 
 ```python
@@ -218,7 +220,7 @@ car_sales['Odometer (KM)'].hist()
 ```
 
 ```python
-car_sales['Price'] = car_sales['Price'].str.replace('[\$\,\.]','').astype(int)
+car_sales['Price'] = car_sales['Price'].str.replace('[\$\,\.]', '').astype(int)
 car_sales['Price'].plot()
 ```
 
@@ -260,6 +262,26 @@ missing_data_drop.to_csv('./source/car_sales_droped.csv')
 
 ```python
 # Column from series
-# test by notebook
+seats_column = pd.Series([5, 5, 5, 5, 5])
+
+# New column called seats
+car_sales['Seats'] = seats_column
+car_sales
 ```
 
+
+```python
+car_sales['Seats'].fillna(5, inplace=True)
+car_sales
+```
+
+```python
+# Column from Python list
+fuel_economy = [7.5, 9.2, 5.0, 9.6, 8.7, 4.7, 7.6, 8.7, 3.0, 4.5]
+car_sales['Fuel per 100KM'] = fuel_economy
+car_sales
+```
+
+```python
+
+```
