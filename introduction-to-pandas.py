@@ -264,3 +264,5 @@ car_sales
 car_sales.drop('Total fuel used (L)', axis=1)
 
 # %%
+car_sales_shuffled = car_sales.sample(frac=0.5)
+car_sales_shuffled
