@@ -125,6 +125,7 @@ car_prices = pd.Series([3000, 1500, 111250])
 car_prices.mean()
 
 # %%
+# 數字加總，object串接
 car_sales.sum()
 
 # %% [markdown]
@@ -155,12 +156,15 @@ car_sales.loc[3]
 animals.iloc[:3]
 
 # %%
+# 選取方式1 [colimn_name]
 car_sales['Make']
 
 # %%
+# 選取方式2 attribute select
 car_sales.Colour
 
 # %%
+# 選取方式3 [boolean]
 car_sales[car_sales['Make'] == 'Toyota']
 
 # %%
@@ -204,13 +208,14 @@ car_sales_missing = pd.read_csv('./source/car_sales_missing_data.csv')
 car_sales_missing
 
 # %%
+# missing data process, fillna(), 將empty 欄位填充值
 car_sales_missing['Odometer'].fillna(car_sales_missing['Odometer'].mean(), inplace=True)
 
 # %%
 car_sales_missing
 
 # %%
-# missing data process
+# missing data process, drop(), 將empty 欄位移除
 missing_data_drop = pd.read_csv('./source/car_sales_missing_data.csv')
 missing_data_drop.dropna(inplace=True)
 
@@ -219,8 +224,8 @@ missing_data_drop.to_csv('./source/car_sales_droped.csv')
 
 # %%
 # Column from series
-# 由於使用 series 來產生 Column 
-seats_column = pd.Series([5, 5, 5, 5, 5])
+# 使用 series 來產生 Column
+seats_column = pd.Series([5, 5, 5, 5, 5,])
 
 # New column called seats
 car_sales['Seats'] = seats_column
@@ -239,10 +244,9 @@ car_sales['Fuel per 100KM'] = fuel_economy
 car_sales
 
 # %%
-car_sales['Total fuel used'] = car_sales['Odometer (KM)'] / 100 * car_sales['Fuel per 100KM']
-
-# %%
-car_sales
+# Create a column, DataFrame['new_column_name'] = ....
+car_sales['Total fuel used '] = car_sales['Odometer (KM)'] / 100 * car_sales['Fuel per 100KM']
+car_sales['Total fuel used (L)'] = car_sales['Odometer (KM)'] / 100 * car_sales['Fuel per 100KM']
 
 # %%
 # Create a column from a single value
@@ -255,5 +259,8 @@ car_sales.dtypes
 
 # %%
 car_sales
+
+# %%
+car_sales.drop('Total fuel used (L)', axis=1)
 
 # %%
