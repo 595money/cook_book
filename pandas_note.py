@@ -26,6 +26,9 @@ jtplot.style()
 # # Pandas CookBook
 
 # %% [markdown]
+# ![](./source/anatomy_of_data_frames.png)
+
+# %% [markdown]
 # * [Question](https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/pandas-exercises.ipynb)  
 # * [Answer](https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/pandas-exercises-solutions.ipynb)
 
