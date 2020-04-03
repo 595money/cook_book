@@ -306,6 +306,28 @@ np.mean(a2)
 np.max(a2) ,np.min(a2), np.std(a2)
 ```
 
-```python
+## Reshaping & transposing
 
+```python
+a2
+```
+
+```python
+a2.shape
+```
+
+```python
+a2 * a3
+```
+
+```python
+a2.reshape(2, 3, 1)
+```
+
+```python
+a2.shape
+```
+
+```python
+a2.T.shape
 ```

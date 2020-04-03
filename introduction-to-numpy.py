@@ -258,4 +258,23 @@ np.mean(a2)
 # %%
 np.max(a2) ,np.min(a2), np.std(a2)
 
+# %% [markdown]
+# ## Reshaping & transposing
+
 # %%
+a2
+
+# %%
+a2.shape
+
+# %%
+a2 * a3
+
+# %%
+a2.reshape(2, 3, 1)
+
+# %%
+a2.shape
+
+# %%
+a2.T.shape
