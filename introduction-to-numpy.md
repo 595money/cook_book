@@ -331,3 +331,9 @@ a2.shape
 ```python
 a2.T.shape
 ```
+
+![](./source/dot_product_element_wise.png)
+![](./source/dot_product_element_wise_2.png)
+
+## Element-wise multiplication (Hadamard product)
+## Dot product

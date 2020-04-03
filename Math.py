@@ -90,6 +90,15 @@ jtplot.style()
 # $\angle$A = $\tan$$^{-1}$($\frac{opp}{adj}$)<br/>
 # $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
 #
+# ##### 正弦定理<br/>
+# ![](./source/math_01_04.png)||
+# --- | ---  
+# [正弦定理](https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
+#
+# ##### 餘弦定理<br/>
+# * 當知道三角形的兩邊和一角時，餘弦定理可被用來計算第三邊的長，或是當知道三邊的長度時，可用來求出任何一個角。
+#
+# [餘弦定理](https://zh.wikipedia.org/wiki/%E9%A4%98%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
 # ##### 直角三角形角度互補關係<br/>
 # ![](./source/math_01_03.png)|![](./source/math_01_02.png)|
 # --- | ---
