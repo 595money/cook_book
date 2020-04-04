@@ -409,16 +409,16 @@ sales_amounts_T
 ```python
 # Create daily_sales
 butter_prices
-
 ```
+
 
 ```python
 np.random.seed(0)
 # Number of jars sold
 sales = np.random.randint(20, size=(5, 3))
 sales.shape
-
 ```
+
 
 ```python
 # Create prices array
@@ -521,10 +521,20 @@ r
 np.argmax(r, axis=4)
 ```
 
-```python
+## 6.Practical Example - NumPy in Action !!!!
 
+
+![](./source/panda.png)
+
+```python
+# Turn an image into a NumPy array
+from matplotlib.image import imread
+panda = imread('./source/panda.png')
+print(type(panda))
 ```
 
 ```python
-
+panda.size, panda.shape, panda.ndim
 ```
+
+![](./source/car-photo.png)

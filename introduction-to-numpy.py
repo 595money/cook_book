@@ -442,6 +442,20 @@ r
 # axisn = nd -1
 np.argmax(r, axis=4)
 
-# %%
+# %% [markdown]
+# ## 6.Practical Example - NumPy in Action !!!!
+
+# %% [markdown]
+# ![](./source/panda.png)
 
 # %%
+# Turn an image into a NumPy array
+from matplotlib.image import imread
+panda = imread('./source/panda.png')
+print(type(panda))
+
+# %%
+panda.size, panda.shape, panda.ndim
+
+# %% [markdown]
+# ![](./source/car-photo.png)
