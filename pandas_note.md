@@ -52,6 +52,9 @@ user_name = pd.Series(['Simon', 'Jay', 'Leo'], name='user_name')
 user_name
 ```
 
+##### [what is shape ?](https://stackoverflow.com/questions/22053050/difference-between-numpy-array-shape-r-1-and-r)
+
+
 ```python
 # 顯示出此資料結構的 (Rows, Columns)
 # Series 為一維資料, 所以只有 Rows有值, Colums 不帶值
@@ -207,3 +210,5 @@ pd.crosstab(some_date.age, some_date.sex)
 ```python
 csv_file_from_url.groupby(['sex']).mean()
 ```
+
+## Practical Example - NumPy in Ation!!!

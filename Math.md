@@ -100,7 +100,7 @@ $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
 
 [餘弦定理](https://zh.wikipedia.org/wiki/%E9%A4%98%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
 ##### 直角三角形角度互補關係<br/>
-![](./source/math_01_03.png)|![](./source/math_01_02.png)|
+![](./source/math_01_03.png)|![](./source/math_01_02.png)
 --- | ---
   
 

@@ -317,10 +317,6 @@ a2.shape
 ```
 
 ```python
-a2 * a3
-```
-
-```python
 a2.reshape(2, 3, 1)
 ```
 
@@ -332,8 +328,203 @@ a2.shape
 a2.T.shape
 ```
 
+<!-- #region -->
 ![](./source/dot_product_element_wise.png)
 ![](./source/dot_product_element_wise_2.png)
 
 ## Element-wise multiplication (Hadamard product)
+* follow broadcast rule, size必須完全相等, 或其中一方為1  
+
+ 
+arrayA | arrayB | math | describe
+--- | --- | --- | ---
+size(1, 2, 3)|size(1, 2, 3)| O | size 相等
+size(1, 2, 3)|size(3, 2, 3)| X | size 不全等
+size(1, 2, 9)|size(9, 1, 1)| O | size 不相等但該維度其中為1
+size(3, 6, 2)|size(3, 6)| X | 維度不對 (維度數由右而左升冪)
+size(3, 6, 2)|size(6, 2)| O | 
+<!-- #endregion -->
+
+```python
+np.random.seed(1)
+e_array_1 = np.random.randint(1, 10, size=(3, 6, 1))
+e_array_2 = np.random.randint(1, 10, size=(6, 1))
+e_array_1 * e_array_2
+```
+
 ## Dot product
+* 
+* 兩元素的
+
+
+```python
+np.random.seed(1)
+dot_1 = np.random.randint(1, 10, size=(3, 2))
+dot_2 = np.random.randint(1, 10, size=(2, 3))
+np.dot(dot_1, dot_2)
+```
+
+## Dot product exmaple (nut butter sales)
+
+```python
+np.random.seed(0)
+# Number of jars sold
+sales_amounts = np.random.randint(20, size=(5, 3))
+sales_amounts
+```
+
+```python
+weekly_sales = pd.DataFrame(sales_amounts,
+              index=['Mon', 'Tues', 'Wed', 'Thurs', 'Fri'],
+              columns=['Almond butter', 'Peanut butter', 'Cashew butter'])
+weekly_sales
+```
+
+```python
+# Create prices array
+prices = np.array([10, 8, 12])
+prices
+```
+
+```python
+# Create butter_price DataFrame
+# 陣列轉換為pd.DataFrame時, 若為一維陣列須明確轉換形狀(reshape)為 1 row n column
+butter_prices = pd.DataFrame(prices.reshape(1, 3),
+                           index=['Price'],
+                           columns=['Almond butter', 'Peanut butter', 'Cashew butter'])
+butter_prices
+```
+
+```python
+# Shaoe aren't aligned, let's transpose
+total_sales = prices.dot(sales_amounts.T)
+total_sales
+```
+
+```python
+sales_amounts_T = sales_amounts.T
+sales_amounts_T
+```
+
+```python
+# Create daily_sales
+butter_prices
+
+```
+
+```python
+np.random.seed(0)
+# Number of jars sold
+sales = np.random.randint(20, size=(5, 3))
+sales.shape
+
+```
+
+```python
+# Create prices array
+price = np.array([10, 8, 12])
+price = price.reshape(1, 3)
+price.shape
+```
+
+```python
+sales.dot(price.T)
+```
+
+```python
+price.dot(sales.T)
+```
+
+```python
+# Create daliy_sales
+butter_prices.shape, weekly_sales.shape
+```
+
+```python
+weekly_sales.T.shape
+```
+
+```python
+daliy_sales = butter_prices.dot(weekly_sales.T)
+daliy_sales
+```
+
+```python
+weekly_sales['Total ($)'] = daliy_sales.T
+weekly_sales
+```
+
+## Comparison Operators
+
+```python
+a1
+```
+
+```python
+a2
+```
+
+```python
+a1 > a2
+```
+
+```python
+a1 >= a2
+```
+
+```python
+bool_array = a1 >= a2
+type(bool_array), bool_array.dtype
+```
+
+## Sorting arrays
+
+```python
+np.random.seed(1)
+random_array = np.random.randint(10, size=(3, 5))
+random_array
+```
+
+```python
+np.sort(random_array)
+```
+
+```python
+# 回傳各維度index, 以'值'由小而大排序
+np.argsort(random_array)
+```
+
+```python
+# 返回最小、返回最大
+np.argmin(a1), np.argmax(a1)
+```
+
+```python
+random_array
+```
+
+```python
+np.argmax(random_array, axis=0)
+```
+
+```python
+np.random.seed(0)
+r = np.random.randint(100, size=(7, 6, 5, 4, 3))
+r
+```
+
+```python
+# axis0 = 1d (row)
+# axis1 = 2d (cloumn)
+# axis2 = 3d ()
+# axisn = nd -1
+np.argmax(r, axis=4)
+```
+
+```python
+
+```
+
+```python
+
+```
