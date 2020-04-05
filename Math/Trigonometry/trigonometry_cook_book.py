@@ -24,25 +24,8 @@ display(HTML("<style>.container { width:80% !important; }</style>"))
 jtplot.style()
 
 # %% [markdown]
-# # Math
-
-# %% [markdown]
-# ## 名詞解釋
-# 純量 scalar  
-# * Distance, speed, time, temperature, mass, length, area, volume, density, charge, pressure, energy,   
-#   work and power are all scalars.
-# * 不具方向性, 只有大小 ( magnitude / size ): 3.044, -7, 1$\frac{1}{2}$
-# * 通常使用細體: A, b  
-#
-# 向量vactor 
-# * Displacement, velocity, acceleration, force and momentum are all vectors.
-# * 具方向性、大小,
-# * 通常使用粗體: **A**, **b**
-# * $\overrightarrow{AB}$
-
-# %% [markdown]
 # ### 三角學
-# ![](./source/math_01_01.png)||
+# ![](../../source/math_01_01.png)||
 # --- | ---
 #   
 # * `opp` = 對邊 (opposite)<br/>
@@ -91,7 +74,7 @@ jtplot.style()
 # $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
 #
 # ##### 正弦定理<br/>
-# ![](./source/math_01_04.png)||
+# ![](../,,/source/math_01_04.png)||
 # --- | ---  
 # [正弦定理](https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
 #
@@ -100,67 +83,13 @@ jtplot.style()
 #
 # [餘弦定理](https://zh.wikipedia.org/wiki/%E9%A4%98%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
 # ##### 直角三角形角度互補關係<br/>
-# ![](./source/math_01_03.png)|![](./source/math_01_02.png)
+# ![](../../source/math_01_03.png)|![](../../source/math_01_02.png)
 # --- | ---
 #   
 #
-#
 
 # %%
-high_var_array = np.array([1, 100, 200, 300, 4000, 5000])
-low_var_array = np.array([2, 4, 6, 8, 10])
-
-# %% [markdown]
-# ### 對數 Logarithm
-# ---
-#
-# [np.log()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.log.html)
-#
-
-# %% [markdown]
-# ### 平方根 Sqrt
-# ---
-# [np.sqrt()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html)
-
-# %% [markdown]
-# ### 算術平均數 Arithmetic mean
-# ---
-# [np.mean()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html)
 
 # %%
-# Demo of std 
-np.mean(high_var_array), np.mean(low_var_array)
-
-# %% [markdown]
-# ### 方差/變異數 Variance
-# ---
-# [np.var()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.var.html)  
-# Variance = measure of the average degree to which each number is difference to mean  
-# Higher variance = wider range of numbers  
-# Lower variance = lower range of numbers  
 
 # %%
-# Demo of var
-np.var(high_var_array), np.var(low_var_array)
-
-# %% [markdown]
-#
-#
-# ### 標準差Standard Deviation
-# [np.std()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html)
-#      
-# ---
-# Strandard deviation = squareroot of variance  
-# var = std ** 0.5  
-#
-# Standard deviation = a measure of how sparead out a group of numbers is from the mean
-
-# %%
-# Demo of std 
-np.std(high_var_array), np.std(low_var_array)
-
-# %% [markdown]
-# ### 內積 Dot Product
-
-# %% [markdown]
-# ### Element Wise

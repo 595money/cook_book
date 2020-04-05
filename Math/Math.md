@@ -42,7 +42,7 @@ jtplot.style()
 
 
 ### 三角學
-![](./source/math_01_01.png)||
+![](../source/math_01_01.png)||
 --- | ---
   
 * `opp` = 對邊 (opposite)<br/>
@@ -91,7 +91,7 @@ $\angle$A = $\tan$$^{-1}$($\frac{opp}{adj}$)<br/>
 $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
 
 ##### 正弦定理<br/>
-![](./source/math_01_04.png)||
+![](../source/math_01_04.png)||
 --- | ---  
 [正弦定理](https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
 
@@ -100,7 +100,7 @@ $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
 
 [餘弦定理](https://zh.wikipedia.org/wiki/%E9%A4%98%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
 ##### 直角三角形角度互補關係<br/>
-![](./source/math_01_03.png)|![](./source/math_01_02.png)
+![](../source/math_01_03.png)|![](../source/math_01_02.png)
 --- | ---
   
 

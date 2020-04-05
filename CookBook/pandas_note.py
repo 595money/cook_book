@@ -19,14 +19,17 @@ import pandas as pd
 from jupyterthemes import jtplot
 from IPython.core.display import display, HTML
 
-display(HTML("<style>.container { width:80% !important; }</style>"))
+display(HTML("<style>.container { width:70% !important; }</style>"))
 jtplot.style()
 
 # %% [markdown]
 # # Pandas CookBook
 
 # %% [markdown]
-# ![](./source/anatomy_of_data_frames.png)
+# ![](../source/pandas-6-step-ml-framework-tools-highlight.png)
+
+# %% [markdown]
+# ![](../source/anatomy_of_data_frames.png)
 
 # %% [markdown]
 # * [Question](https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/pandas-exercises.ipynb)  
@@ -41,7 +44,7 @@ jtplot.style()
 #
 
 # %% [markdown]
-# ### DataType
+# #### DataType
 # ---
 
 # %% [markdown]
@@ -203,6 +206,3 @@ pd.crosstab(some_date.age, some_date.sex)
 
 # %%
 csv_file_from_url.groupby(['sex']).mean()
-
-# %% [markdown]
-# ## Practical Example - NumPy in Ation!!!
