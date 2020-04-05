@@ -111,6 +111,16 @@ high_var_array = np.array([1, 100, 200, 300, 4000, 5000])
 low_var_array = np.array([2, 4, 6, 8, 10])
 ```
 
+### 指數 exponent
+---
+* 2$^{5}$, $^{5}$就是指數, 1 $\times$ 2 $\times$ 2 $\times$ 2 $\times$ 2 $\times$ 2 <br/>
+* n$^{0}$ = 1
+* n$^{1}$ = n
+
+[np.log()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html)
+
+
+
 ### 對數 Logarithm
 ---
 
