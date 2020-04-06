@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ---
 jupyter:
   jupytext:
@@ -87,14 +88,25 @@ $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
   
 
 
+
+#### 應用
+---
+
+
+* 三角形使用正弦定理求邊長  
+$\bigtriangleup$ABC, $\frac{\sin\angle{A}}{a}$ = $\frac{\sin\angle{B}}{b}$ = $\frac{\sin\angle{C}}{c}$
+* 三角形使用三角函數算角度
+
 ```python
+opp = 3
+adj = 4
+hyp = 5
+# 有opp與hyp要計算角度
+np.arcsin(opp/hyp)
 
-```
+# 有adj與hyp要計算角度
+np.arccos(adj/hyp)
 
-```python
-
-```
-
-```python
-
+# 有opp與adj要計算角度
+np.arctan(opp/adj)
 ```

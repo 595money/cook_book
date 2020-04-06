@@ -117,13 +117,13 @@ low_var_array = np.array([2, 4, 6, 8, 10])
 * 2$^{5}$, $^{5}$就是指數, 1 $\times$ 2 $\times$ 2 $\times$ 2 $\times$ 2 $\times$ 2 <br/>
 * n$^{0}$ = 1
 * n$^{1}$ = n
-* 2$^{5}$ + 2$^{5}$ = 2$^{10}$
-* (2$^{5}$)$^{5}$ = 2$^{25}$
+* 2$^{5}$ + 2$^{4}$ = 2$^{9}$
+* (2$^{5}$)$^{4}$ = 2$^{20}$
 * 2$^{-5}$ = $\frac{1}{2^{5}}$, 先轉化為分數再加上指數絕對值
 
 
 
-[np.log()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html)
+[np.exp()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html)
 
 <!-- #endregion -->
 
