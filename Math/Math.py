@@ -117,6 +117,18 @@ low_var_array = np.array([2, 4, 6, 8, 10])
 # * n$^{0}$ = 1
 # * n$^{1}$ = n
 #
+# 指數運算
+# 2$^{5}$ + 2$^{5}$ = 2$^{10}$
+#
+# (2$^{5}$)$^{5}$ = 2$^{25}$
+#
+# 負指數運算
+# 先轉化為分數 再加上指數絕對值
+#
+# 2$^{-5}$ = $\frac{1}{2^{-5}$}$
+#
+#
+#
 # [np.log()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html)
 #
 
