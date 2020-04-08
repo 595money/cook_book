@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ---
 jupyter:
   jupytext:
@@ -25,14 +26,29 @@ jtplot.style()
 
 ## 代數基礎
 
-
+<!-- #region -->
 * inequalities (不等式)
+若c為 正數 且 a > b；則 ac > bc。   
+若c為 正數 且 a < b；則 ac < bc。  
+若c為 負數 且 a > b；則 ac < bc。  
+若c為 負數 且 a < b；則 ac > bc。  
+-2x > 20  
+x < $\frac{20}{-2}$    
+* linear equations (線性方程式/一次方程式)  
+所有解可以在座標圖上形成一直線  
+y = 2x-3 |x|y|  
+---|---|---
+|0|-3
+|1|-1
+|2|1
 
--2x > 20
-x < 20/ -2  
-箭頭方向會改變
-若${\displaystyle c}$c為 正數 且 {\displaystyle a>b}a > b；則 {\displaystyle ac>bc}ac > bc。
-若{\displaystyle c}c為 正數 且 {\displaystyle a<b}a < b；則 {\displaystyle ac<bc}ac < bc 。
-若{\displaystyle c}c為 負數 且 {\displaystyle a>b}a > b；則 {\displaystyle ac<bc}ac < bc 。
-若{\displaystyle c}c為 負數 且 {\displaystyle a<b}a < b；則 {\displaystyle ac>bc}ac > bc。
 
+* intercepts (截距)  
+線性方程式於座標上畫出一直線.  
+該線段通過X軸處為 x-intercepts, 該點座標為(n, 0)  
+該線段通過y軸處為 y-intercepts  該點座標為(0, n)  
+
+* slope (斜率)  
+slope = $\frac{\Delta{y}}{\Delta{x}}$  
+y 軸增加的量除以 X 軸增加的量
+<!-- #endregion -->
