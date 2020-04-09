@@ -39,6 +39,8 @@ jtplot.style()
 # * 具方向性、大小,
 # * 通常使用粗體: **A**, **b**
 # * $\overrightarrow{AB}$
+#
+# [數學常用符號](https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7%E8%A1%A8)
 
 # %% [markdown]
 # ### 三角學
@@ -128,8 +130,12 @@ low_var_array = np.array([2, 4, 6, 8, 10])
 # %% [markdown]
 # ### 對數 Logarithm
 # ---
-#
-# [np.log()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.log.html)
+# * 以2$^{5}$為例, $^{5}$是指數  
+# * 以2$^{5}$為例, $\log _{2}$$^{32}$ = 5, $\log _{2}$$^{32}$的5是對數、2是底數
+# * $\log _{A}$$^{C}$ = ${B}$, 意思是 "${A}$ 為底數, ${C}$指數需要多少才能得到積為${B}$ ?"  
+# [np.log(),歐拉數e (2.71828)](https://docs.scipy.org/doc/numpy/reference/generated/numpy.log.html)  
+# [np.1og2(), 以2為底數](https://docs.scipy.org/doc/numpy/reference/generated/numpy.log2.html)    
+# [np.log10(), 以10為底數](https://docs.scipy.org/doc/numpy/reference/generated/numpy.log10.html#numpy.log10)  
 #
 
 # %% [markdown]
