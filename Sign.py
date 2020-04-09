@@ -98,7 +98,7 @@ jtplot.style()
 # $\exists$|`$\exists$`|存在
 # 9$\frac{1}{2}$|`9$\frac{1}{2}$`|分號
 # 1$^{999}$|`1$^{999}$`|次方
-#
+# $\sqrt{100}$|`$\sqrt{100}$`|根號
 #
 #
 #
@@ -123,6 +123,15 @@ jtplot.style()
 # ### 集合符號
 # Sign <img width=200/>|  Code<img width=400/>|Discript
 # :---|---|--
+# $\mathbb{N}$|`$\mathbb{N}$`|set of  natural numbers(自然數)
+# $\mathbb{Z}$|`$\mathbb{Z}$`|set of integers(整數)
+# $\mathbb{Q}$|`$\mathbb{Q}$`|set of rational numbers(有理數)
+# $\mathbb{A}$|`$\mathbb{A}$`|set of algebraic numbers(代數數)
+# $\mathbb{R}$|`$\mathbb{R}$`|set of real numbers(實數)
+# $\mathbb{C}$|`$\mathbb{C}$`|set of complex numbers(複數)
+# $\mathbb{H}$|`$\mathbb{H}$`|set of quaternions(四元數)
+# $\mathbb{O}$|`$\mathbb{O}$`|set of octonions(八元數)
+# $\mathbb{S}$|`$\mathbb{S}$`|set of sedenions(十六元數)
 # $\emptyset$|`$\emptyset$`|空集合
 # $\in$|`$\in$`|屬於
 # $\not\subset$|`$\notin$`|不屬於
@@ -138,6 +147,8 @@ jtplot.style()
 # $\bigoplus$|`$\bigoplus$`|互斥或
 # $\biguplus$|`$\biguplus$`|多重集
 # $\bigsqcup$|`$\bigsqcup$`|互斥聯集
+# {x : x < 0 }|:|使得
+# {x \| x < 0 }|\||使得
 
 # %% [markdown]
 # ### 微積分

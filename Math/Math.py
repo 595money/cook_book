@@ -39,78 +39,13 @@ jtplot.style()
 # * 具方向性、大小,
 # * 通常使用粗體: **A**, **b**
 # * $\overrightarrow{AB}$
-#
-# [數學常用符號](https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7%E8%A1%A8)
 
 # %% [markdown]
-# ### 三角學
-# ![](../source/math_01_01.png)||
-# --- | ---
-#   
-# * `opp` = 對邊 (opposite)<br/>
-# * `hyp` = 斜邊 (hypotenuse)<br/>
-# * `adj` = 臨邊 (adjacent)<br/>
-# * `銳角` = $\angle$0$^\circ$ ~ $\angle$90$^\circ$<br/>   
-# * $\bigtriangleup$ABC與$\bigtriangleup$DEF即使角度相同, 且已知$\bigtriangleup$ABC部份邊長<br/> 
-# 仍不能套用三角形函數來推算$\bigtriangleup$DEF的邊長
+# ## 常用符號解釋
 #
-# ### 銳角三角形口訣: soh、cah、toa<br/> 
-# ##### 三角函數 Trigonometric functions <br/>
+# * $\Delta$ Delta = 變化量 (增加/減少)
 #
-# * 多用來求邊長<br/>
-# * Parameters: 內角角度<br/>
-# * Return: 比值, 內角與兩邊長(opp、adj、hyo擇二)的比值關係<br/>
-# * Note: 回傳值(邊長比值)可與已知邊長推導出未知邊長<br/>
-#
-# `正弦`<br/>
-# $\sin$($\angle$A) = $\frac{opp}{hyp}$<br/>
-# $\sin$($\angle$A) = $\cos$($\angle$B)<br/>
-# `餘弦`<br/>
-# $\cos$($\angle$A) = $\frac{adj}{hyp}$<br/>
-# $\cos$($\angle$A) = $\sin$($\angle$B)<br/> 
-# `正切`<br/> 
-# $\tan$($\angle$A) = $\frac{opp}{adj}$<br/>
-#
-# ##### 反三角函數 Inverse trigonometric functions<br/>
-#
-# * 多用來求角度<br/>
-# * Parameters: 比值, 內角與兩邊長(opp、adj、hyo擇二)的比值<br/>
-# * Return: 內角角度<br/>
-# * Note: <br/>
-#
-# `正弦` <br/> 
-# $\sin$$^{-1}$($\angle$A) = $\frac{opp}{hyp}$<br/> 
-# $\angle$A = $\sin$$^{-1}$($\frac{opp}{hyp}$)<br/>
-# $\angle$A = $\sin$$^{-1}$($\frac{BC}{AB}$)<br/>
-#
-# `餘弦`<br/> 
-# $\cos$$^{-1}$($\angle$A) = $\frac{adj}{hyp}$<br/> 
-# $\angle$A = $\cos$$^{-1}$($\frac{adj}{hyp}$)<br/>
-# $\angle$A = $\cos$$^{-1}$($\frac{AC}{AB}$)<br/>
-# `正切`<br/> 
-# $\tan$$^{-1}$($\angle$A) = $\frac{opp}{adj}$<br/> 
-# $\angle$A = $\tan$$^{-1}$($\frac{opp}{adj}$)<br/>
-# $\angle$A = $\tan$$^{-1}$($\frac{BC}{AC}$)<br/>
-#
-# ##### 正弦定理<br/>
-# ![](../source/math_01_04.png)||
-# --- | ---  
-# [正弦定理](https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
-#
-# ##### 餘弦定理<br/>
-# * 當知道三角形的兩邊和一角時，餘弦定理可被用來計算第三邊的長，或是當知道三邊的長度時，可用來求出任何一個角。
-#
-# [餘弦定理](https://zh.wikipedia.org/wiki/%E9%A4%98%E5%BC%A6%E5%AE%9A%E7%90%86)  <br/>
-# ##### 直角三角形角度互補關係<br/>
-# ![](../source/math_01_03.png)|![](../source/math_01_02.png)
-# --- | ---
-#   
-#
-#
-
-# %%
-high_var_array = np.array([1, 100, 200, 300, 4000, 5000])
-low_var_array = np.array([2, 4, 6, 8, 10])
+# [數學常用符號](https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7%E8%A1%A8)
 
 # %% [markdown]
 # ### 指數 exponent
@@ -139,9 +74,19 @@ low_var_array = np.array([2, 4, 6, 8, 10])
 #
 
 # %% [markdown]
+# ### 虛數 Imaginary
+# ---
+# * i × i = −1
+# * i = $\sqrt{-1}$
+
+# %% [markdown]
 # ### 平方根 Sqrt
 # ---
 # [np.sqrt()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html)
+
+# %%
+high_var_array = np.array([1, 100, 200, 300, 4000, 5000])
+low_var_array = np.array([2, 4, 6, 8, 10])
 
 # %% [markdown]
 # ### 算術平均數 Arithmetic mean
