@@ -55,5 +55,20 @@ ${-2x > 20}\Rightarrow{x < \frac{20}{-2}}$
 ![](../../source/algebra_basics_01.png)
   * ${y = mx + b}$ 
   * ${m = slope,\;x = b ,\;y = 0}$
+
+* System of equations (線性方程組)
+
+
+
+
+ One solution | Infinitely solutions | No solutions
+--- | --- | ---
+![](../../source/algebra_basics_02_1.png)|![](../../source/algebra_basics_02_2.png)|![](../../source/algebra_basics_02_3.png)
+當兩線性方程式有一點相交時, 有唯一解 | 當兩線性方程式完全重疊時, 有無限解 | 當兩線性方程式平行時, 無解
+  
+
+
+
+  
   
 <!-- #endregion -->

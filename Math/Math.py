@@ -50,6 +50,7 @@ jtplot.style()
 # %% [markdown]
 # ### 指數 exponent
 # ---
+# ![](../source/math_01.png)
 # * 2$^{5}$, $^{5}$就是指數, 1 $\times$ 2 $\times$ 2 $\times$ 2 $\times$ 2 $\times$ 2 <br/>
 # * n$^{0}$ = 1
 # * n$^{1}$ = n
