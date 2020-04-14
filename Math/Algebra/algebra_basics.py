@@ -75,6 +75,9 @@ jtplot.style()
 #   * $y = f(x), f(x) = 2x + 4$ 
 #   * $f^{-1}(y)$
 #
+# * piecewise functions 分段函數
+# ![](../../source/algebra_basics_03.png)
+#   * $f(x)=\begin{cases}-9,\;-9<x\leq-5\\-6,\;-5<x\leq-1\\-7,\;-1<x\leq9\end{cases}$
 # * Sequance 序列  
 #   * finite  ${\{a_k\}}_{k=1}^4 = \{1,\;4,\;7,\;10\}$  
 #     *  ${\{a_k\}}_{k=1}^4\; with\; a_k = 1+3(k-1)$  
@@ -82,4 +85,5 @@ jtplot.style()
 #     * ${有限序列 a,\;}$
 #   * infinite  ${\{a_k\}}_{k=1}^4 = \{1,\;4,\;7,\;10,\cdots\}$  
 #     *  ${\{a_k\}}_{k=1}^\infty\;  with\; a_k = 1+3(k-1)$
-#   * arithmetic sequence (等差数列)
+#   * arithmetic sequence (等差數列)
+#   * geometric sequence (等比數列)
