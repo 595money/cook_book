@@ -78,7 +78,8 @@ jtplot.style()
 # * Sequance 序列  
 #   * finite  ${\{a_k\}}_{k=1}^4 = \{1,\;4,\;7,\;10\}$  
 #     *  ${\{a_k\}}_{k=1}^4\; with\; a_k = 1+3(k-1)$  
-#     *  ${\{a_k\}}_{k=1}^4\; with\; a_k = a_{k-1} + 3$ 
+#     *  ${\{a_k\}}_{k=1}^4\; with\; a_1 = 1,\;a_k = a_{k-1} + 3$ 
 #     * ${有限序列 a,\;}$
 #   * infinite  ${\{a_k\}}_{k=1}^4 = \{1,\;4,\;7,\;10,\cdots\}$  
-#     *  ${\{a_k\}}_{k=1}^\infty\;  with\; a_k = 1+3(k-1)$    
+#     *  ${\{a_k\}}_{k=1}^\infty\;  with\; a_k = 1+3(k-1)$
+#   * arithmetic sequence (等差数列)
