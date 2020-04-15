@@ -80,10 +80,17 @@ jtplot.style()
 #   * $f(x)=\begin{cases}-9,\;-9<x\leq-5\\-6,\;-5<x\leq-1\\-7,\;-1<x\leq9\end{cases}$
 # * Sequance 序列  
 #   * finite  ${\{a_k\}}_{k=1}^4 = \{1,\;4,\;7,\;10\}$  
-#     *  ${\{a_k\}}_{k=1}^4\; with\; a_k = 1+3(k-1)$  
-#     *  ${\{a_k\}}_{k=1}^4\; with\; a_1 = 1,\;a_k = a_{k-1} + 3$ 
+#     * ${\{a_k\}}_{k=1}^4\; with\; a_k = 1+3(k-1)$  
+#     * ${\{a_k\}}_{k=1}^4\; with\; a_1 = 1,\;a_k = a_{k-1} + 3$ 
 #     * ${有限序列 a,\;}$
 #   * infinite  ${\{a_k\}}_{k=1}^4 = \{1,\;4,\;7,\;10,\cdots\}$  
-#     *  ${\{a_k\}}_{k=1}^\infty\;  with\; a_k = 1+3(k-1)$
+#     * ${\{a_k\}}_{k=1}^\infty\;  with\; a_k = 1+3(k-1)$
 #   * arithmetic sequence (等差數列)
+#     * k = 序列 a(1), r = 序列變化量, n = 序列索引
+#     * 公式:$\begin{cases}a(1)=\;k\\a(n)=\;k\;+\;r\;(n-1)\end{cases}$
+#     * $\begin{cases}a(1)=\;10\\a(n)= k\times r\;(n-1)\end{cases}$
+#     * $a(5)= 10\times 10\;(5-1)$  
 #   * geometric sequence (等比數列)
+#     * k = 序列 a(1), r = 序列變化量, n = 序列索引
+#     * 公式:$\begin{cases}a(1)=\;k\\a(n)=\;r\;(n-1)\end{cases}$
+#     * 公式:$\begin{cases}a(1)=\;k\\a(n)=\;k\times r^{n-1}\end{cases}$

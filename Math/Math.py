@@ -84,6 +84,9 @@ jtplot.style()
 # ### 平方根 Sqrt
 # ---
 # [np.sqrt()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html)
+# * $\sqrt{42a^4b^6} = \sqrt{2}\ast\sqrt{3}\ast\sqrt{7}\ast\sqrt{a}\ast\sqrt{a}\ast\sqrt{a}\ast\sqrt{a}\ast\sqrt{b}\ast\sqrt{b}\ast\sqrt{b}\ast\sqrt{b}\ast\sqrt{b}\ast\sqrt{b}$  
+# $\sqrt{42a^4b^6} = a^2b^3\sqrt{2}\ast\sqrt{3}\ast\sqrt{7}$  
+# $\sqrt{42a^4b^6} = a^2b^3\sqrt{42}$
 
 # %%
 high_var_array = np.array([1, 100, 200, 300, 4000, 5000])
