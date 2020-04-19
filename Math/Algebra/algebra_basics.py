@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -94,3 +94,9 @@ jtplot.style()
 #     * k = 序列 a(1), r = 序列變化量, n = 序列索引
 #     * 公式:$\begin{cases}a(1)=\;k\\a(n)=\;r\;(n-1)\end{cases}$
 #     * 公式:$\begin{cases}a(1)=\;k\\a(n)=\;k\times r^{n-1}\end{cases}$
+# * 二次方程式分解策略
+# ![](../../source/Algebra_01_01.png)
+#     * 排除共同因數  
+#     * 和積模式  
+#     * 分組方法  
+#     * 方差
