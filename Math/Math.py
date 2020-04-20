@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -77,8 +77,29 @@ jtplot.style()
 # %% [markdown]
 # ### 虛數 Imaginary
 # ---
-# * i × i = −1
-# * i = $\sqrt{-1}$
+# ${用來解決 X^2=-1 這種問題}$
+# * ${i^0 = 1}$
+# * ${i^1 = \sqrt{-1} = i}$
+# * ${i^2 = -1}$
+# * ${i^3 = -i}$
+
+# %% [markdown]
+# ### 複數 Complex
+# ---
+# 實數與虛數都屬於複數的子集  
+# 複數的定義為 ${a+bi}$  
+# ${a = Real part, b = Imaginary part}$  
+# $example:{9}$  
+# * ${(9)a + (0)bi}$
+# * ${Complex,\;Real}$  
+#   
+# $example:{-9i}$   
+# *  ${(0)a + (-9)bi}$  
+# *  ${Complex,\;Imaginary}$  
+#
+# $example:{9-9i}$   
+# * ${(9)a + (-9)bi}$  
+# * ${Complex\;Only}$    
 
 # %% [markdown]
 # ### 平方根 Sqrt
