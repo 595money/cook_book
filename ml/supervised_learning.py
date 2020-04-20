@@ -1,7 +1,7 @@
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,py:hydrogen
+#     formats: ipynb,py:hydrogen,md
 #     text_representation:
 #       extension: .py
 #       format_name: hydrogen
