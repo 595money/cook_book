@@ -25,7 +25,6 @@ import matplotlib.pyplot as plt
 import sklearn 
 from jupyterthemes import jtplot
 jtplot.style()
-##
 
 # %%
 df = pd.read_csv('./source/original.csv')
