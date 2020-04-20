@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,6 +17,7 @@
 # %%
 # %matplotlib inline
 import matplotlib.pylab as plt
+import numpy as np
 import pandas as pd
 from jupyterthemes import jtplot
 from IPython.core.display import display, HTML
@@ -167,4 +168,16 @@ ax[1, 1].hist(np.random.randn(1000));
 # %%
 # Make a dataframe
 car_sales = pd.read_csv('./source/car_sales.csv')
+car_sales['Price'] = car_sales['Price'].str.replace('[\$\,\.]', '') 
 car_sales
+
+# %%
+ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2020', periods=1000))
+ts = ts.cumsum()
+ts.plot();
+
+# %%
+car_sales['Totla Sales'] = car_sales['Price'].cumsum()
+car_sales
+
+# %%
