@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ---
 jupyter:
   jupytext:
@@ -105,4 +106,35 @@ clf.score(X_train, y_train)
 
 ```python
 clf.score(X_test, y_test)
+```
+
+```python
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+print(classification_report(y_test, y_preds))
+```
+
+```python
+confusion_matrix(y_test, y_preds)
+```
+
+```python
+accuracy_score(y_test, y_preds)
+```
+
+```python
+# 5. Imporve a model
+# Try different amount of n_estimators
+np.random.seed(42)
+for i in range(10, 100, 10):
+    print(f'Trying model with {i} estimators...')
+    clf = RandomForestClassifier(n_estimators=i).fit(X_train, y_train)
+    print(f'Model accuracy on test set:{clf.score(X_test, y_test) * 100:.2f}%')
+```
+
+```python
+# RandomForestClassifier.score 與  accuracy_score 的差別再哪
+# split data > tran, test
+# fit(x_tran, y_tran) > clf
+# clf.predict(x_test) > y_predict
+# clf.score(x_test, y_test)
 ```
