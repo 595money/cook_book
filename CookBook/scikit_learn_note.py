@@ -195,7 +195,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # %%
 # Build machine learning model
-from sklearn.ensemble import RandomForestRegressoCtrl - Shift - Enterr
+from sklearn.ensemble import RandomForestRegressor
 model = RandomForestRegressor()
 model.fit(X_train, y_train)
 model.score(X_test, y_test)
@@ -235,3 +235,28 @@ model.score(X_test, y_test)
 # 1. Fill them with some value (also known as imputation)
 # 2. Remove the samples with missing data altogether.
 #
+
+# %%
+# Import car sales misssing data
+car_sales_missing = pd.read_csv('../data/car-sales-extended-missing-data.csv')
+car_sales_missing
+
+# %%
+car_sales_missing.isna().sum()
+
+# %%
+# Create X & y
+X = car_sales_missing.drop('Price', axis=1)
+y =
+
+# %%
+# Turn the categories into numbers
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+# 將非數字資料轉換為數字, 其中Doors較為特別, 雖然它已經是數字, 但是幾個車門可以作分類, 因此也加入分類
+categorical_features = ['Make', 'Colour', 'Doors']
+one_hot = OneHotEncoder()
+transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
+transformed_x = transformer.fit_transform(X)
+pd.DataFrame(transformed_x)
