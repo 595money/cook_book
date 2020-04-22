@@ -216,7 +216,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 ```python
 # Build machine learning model
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressoCtrl - Shift - Enterr
 model = RandomForestRegressor()
 model.fit(X_train, y_train)
 model.score(X_test, y_test)
@@ -234,5 +234,29 @@ one_hot = OneHotEncoder()
 transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
 transformed_x = transformer.fit_transform(X)
 pd.DataFrame(transformed_x)
-
 ```
+
+
+<!-- #raw -->
+# 還原
+dummies = pd.get_dummies(car_sales[['Make', 'Colour', 'Doors']])
+dummies
+<!-- #endraw -->
+
+```python
+# Let's refit the model
+# Use transformed_x
+X_train, X_test, y_train, y_test = train_test_split(transformed_x, y, test_size=0.2)
+model.fit(X_train, y_train)
+```
+
+```python
+# 因為汽車的價格無法從顏色、廠牌、車門數來做出準確預測所以分數很低, 
+# 但本節重點在於如何將廢數據化的資料轉換為數字
+model.score(X_test, y_test)
+```
+
+### 1.2 What if where missing values)?
+1. Fill them with some value (also known as imputation)
+2. Remove the samples with missing data altogether.
+
