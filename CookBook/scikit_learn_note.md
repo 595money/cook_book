@@ -274,7 +274,8 @@ car_sales_missing.isna().sum()
 ```python
 # Create X & y
 X = car_sales_missing.drop('Price', axis=1)
-y =
+y = car_sales_missing['Price']
+
 ```
 
 ```python
@@ -282,10 +283,66 @@ y =
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
-# 將非數字資料轉換為數字, 其中Doors較為特別, 雖然它已經是數字, 但是幾個車門可以作分類, 因此也加入分類
 categorical_features = ['Make', 'Colour', 'Doors']
 one_hot = OneHotEncoder()
 transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
 transformed_x = transformer.fit_transform(X)
 pd.DataFrame(transformed_x)
 ```
+
+### Option 1:Fill missing data with Pandas
+
+```python
+# Fill the 'Make' column
+car_sales_missing['Make'].fillna('missing', inplace=True)
+
+# Fill the 'Colour' column
+car_sales_missing['Colour'].fillna('missing', inplace=True)
+
+# Fill the 'Odometer (KM)' column
+car_sales_missing['Odometer (KM)'].fillna(car_sales_missing['Odometer (KM)'].mean(), inplace=True)
+
+# Fill the 'Doors' column
+car_sales_missing['Doors'].fillna(4, inplace=True)
+
+```
+
+```python
+# Check our dataframe again
+car_sales_missing.isna().sum()
+```
+
+```python
+# Remove row with missing Price value
+# 因為 Price 是 label, 當 label缺失時, 將無法準確訓練model
+car_sales_missing.dropna(inplace=True)
+
+
+```
+
+```python
+car_sales_missing.isna().sum()
+```
+
+```python
+len(car_sales_missing)
+```
+
+```python
+X = car_sales_missing.drop('Price', axis=1)
+y = car_sales_missing['Price']
+```
+
+```python
+# Turn the categories into numbers
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+categorical_features = ['Make', 'Colour', 'Doors']
+one_hot = OneHotEncoder()
+transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
+transformed_x = transformer.fit_transform(car_sales_missing)
+transformed_x
+```
+
+### Option 2:Fill missing values with Scikit-Learn
