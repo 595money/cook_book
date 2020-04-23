@@ -182,7 +182,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 ```python
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
+X_train.shape, X_test.shape, y_train.shape, y_test.shapehttps://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
 ```
 
 Clean Data  
@@ -253,7 +253,7 @@ model.fit(X_train, y_train)
 ```python
 # 因為汽車的價格無法從顏色、廠牌、車門數來做出準確預測所以分數很低, 
 # 但本節重點在於如何將廢數據化的資料轉換為數字
-model.score(X_test, y_test)
+model.score(X_test, y_test)https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
 ```
 
 ### 1.2 What if where missing values)?
@@ -275,8 +275,8 @@ car_sales_missing.isna().sum()
 # Create X & y
 X = car_sales_missing.drop('Price', axis=1)
 y = car_sales_missing['Price']
-
 ```
+
 
 ```python
 # Turn the categories into numbers
@@ -304,8 +304,8 @@ car_sales_missing['Odometer (KM)'].fillna(car_sales_missing['Odometer (KM)'].mea
 
 # Fill the 'Doors' column
 car_sales_missing['Doors'].fillna(4, inplace=True)
-
 ```
+
 
 ```python
 # Check our dataframe again
@@ -346,3 +346,227 @@ transformed_x
 ```
 
 ### Option 2:Fill missing values with Scikit-Learn
+
+```python
+car_sales_missing = pd.read_csv('../data/car-sales-extended-missing-data.csv')
+car_sales_missing.head()
+```
+
+```python
+car_sales_missing.isna().sum()
+```
+
+```python
+# Drop the rows with no labels
+car_sales_missing.dropna(subset=['Price'], inplace=True)
+
+# Split into X ＆ y
+X = car_sales_missing.drop('Price', axis=1)
+y = car_sales_missing['Price']
+
+```
+
+```python
+# Fill missing values with Scilit-Learn
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+
+# Fill categorical values with 'missing' & numerical values with mean
+cat_imputer = SimpleImputer(strategy='constant', fill_value='missing')
+door_imputer = SimpleImputer(strategy='constant', fill_value=4)
+num_imputer = SimpleImputer(strategy='mean')
+
+# Define columns
+cat_features = ['Make', 'Colour']
+door_feature = ['Doors']
+num_features = ['Odometer (KM)']
+
+# Create an imputer (something that fills missing data)
+imputer = ColumnTransformer([('cat_imputer', cat_imputer, cat_features), 
+                             ('door_imputer', door_imputer, door_feature), 
+                             ('num_imputer', num_imputer, num_features)])
+
+# Transform the data
+filled_X = imputer.fit_transform(X)
+filled_X
+```
+
+```python
+car_sales_filled = pd.DataFrame(filled_X, columns=['Make', 'Colour', 'Doors', 'Odometer (KM)'])
+car_sales_filled.head()
+```
+
+```python
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer 
+categorical_features = ['Make', 'Colour', 'Doors']
+one_hot = OneHotEncoder()
+transformer = ColumnTransformer([('one_hot', 
+                                  one_hot, 
+                                  categorical_features)],
+                               remainder='passthrough')
+transformed_X = transformer.fit_transform(car_sales_filled)
+transformed_X
+```
+
+```python
+# Now we've got our data as numbers and filled (no missing values)
+# Let's fit a model
+np.random.seed(42)
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(transformed_X, y, test_size=0.2)
+model = RandomForestRegressor()
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+
+```
+
+### Option 2: Filling missing data and transforming categorical data with Scikit-Learn
+This notebook updates the code in the "Getting Your Data Ready: Handling Missing Values in Scikit-Learn".
+
+The video shows filling and transforming the entire dataset (X) and although the techniques are correct, it's best to fill and transform training and test sets separately (as shown in the code below).
+
+```python
+# Standard imports
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+```python
+car_sales_missing = pd.read_csv('../data/car-sales-extended-missing-data.csv')
+car_sales_missing.head()
+```
+
+```python
+# Check missing values
+car_sales_missing.isna().sum()
+```
+
+```python
+# Drop the rows with no labels
+car_sales_missing.dropna(subset=["Price"], inplace=True)
+car_sales_missing.isna().sum()
+```
+
+Note the difference in the following cell to the videos, the data is split into train and test before any filling missing values or transformations take place.
+
+```python
+from sklearn.model_selection import train_test_split
+
+# Split into X & y
+X = car_sales_missing.drop("Price", axis=1)
+y = car_sales_missing["Price"]
+
+# Split data into train and test
+np.random.seed(42)
+X_train, X_test, y_train, y_test = train_test_split(X,
+                                                    y,
+                                                    test_size=0.2)
+```
+
+```python
+# Check missing values
+X.isna().sum()
+```
+
+Let's fill the missing values. We'll fill the training and test values separately to ensure training data stays with the training data and test data stays with the test data.
+
+Note: We use fit_transform() on the training data and transform() on the testing data. In essence, we learn the patterns in the training set and transform it via imputation (fit, then transform). Then we take those same patterns and fill the test set (transform only).
+
+```python
+# Fill missing values with Scikit-Learn
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+
+# Fill categorical values with 'missing' & numerical values with mean
+cat_imputer = SimpleImputer(strategy="constant", fill_value="missing")
+door_imputer = SimpleImputer(strategy="constant", fill_value=4)
+num_imputer = SimpleImputer(strategy="mean")
+
+# Define columns
+cat_features = ["Make", "Colour"]
+door_feature = ["Doors"]
+num_features = ["Odometer (KM)"]
+
+# Create an imputer (something that fills missing data)
+imputer = ColumnTransformer([
+    ("cat_imputer", cat_imputer, cat_features),
+    ("door_imputer", door_imputer, door_feature),
+    ("num_imputer", num_imputer, num_features)
+])
+
+# Fill train and test values separately
+filled_X_train = imputer.fit_transform(X_train)
+filled_X_test = imputer.transform(X_test)
+
+# Check filled X_train
+filled_X_train
+```
+
+Now we've filled our missing values, let's check how many are missing from each set.
+
+```python
+# Get our transformed data array's back into DataFrame's
+car_sales_filled_train = pd.DataFrame(filled_X_train, 
+                                      columns=["Make", "Colour", "Doors", "Odometer (KM)"])
+
+car_sales_filled_test = pd.DataFrame(filled_X_test, 
+                                     columns=["Make", "Colour", "Doors", "Odometer (KM)"])
+
+# Check missing data in training set
+car_sales_filled_train.isna().sum()
+```
+
+```python
+# Check missing data in test set
+car_sales_filled_test.isna().sum()
+```
+
+```python
+# Check to see the original... still missing values
+car_sales_missing.isna().sum()
+```
+
+Okay, no missing values but we've still got to turn our data into numbers. Let's do that using one hot encoding.
+
+Again, keeping our training and test data separate.
+
+```python
+# Import OneHotEncoder class from sklearn
+from sklearn.preprocessing import OneHotEncoder
+
+# Now let's one hot encode the features with the same code as before 
+categorical_features = ["Make", "Colour", "Doors"]
+one_hot = OneHotEncoder()
+transformer = ColumnTransformer([("one_hot", 
+                                 one_hot, 
+                                 categorical_features)],
+                                 remainder="passthrough")
+
+# Fill train and test values separately
+transformed_X_train = transformer.fit_transform(car_sales_filled_train)
+transformed_X_test = transformer.transform(car_sales_filled_test)
+
+# Check transformed and filled X_train
+transformed_X_train.toarray()
+```
+
+Fit a model
+Wonderful! Now we've filled and transformed our data, ensuring the training and test sets have been kept separate. Let's fit a model to the training set and evaluate it on the test set.
+
+```python
+# Now we've transformed X, let's see if we can fit a model
+np.random.seed(42)
+from sklearn.ensemble import RandomForestRegressor
+
+# Setup model
+model = RandomForestRegressor()
+
+# Make sure to use transformed (filled and one-hot encoded X data)
+model.fit(transformed_X_train, y_train)
+model.score(transformed_X_test, y_test)
+```
