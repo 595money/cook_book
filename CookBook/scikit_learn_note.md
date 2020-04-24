@@ -182,7 +182,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 ```python
-X_train.shape, X_test.shape, y_train.shape, y_test.shapehttps://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
 ```
 
 Clean Data  
@@ -216,10 +216,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 ```python
 # Build machine learning model
-from sklearn.ensemble import RandomForestRegressor
-model = RandomForestRegressor()
-model.fit(X_train, y_train)
-model.score(X_test, y_test)
+# from sklearn.ensemble import RandomForestRegressor
+# model = RandomForestRegressor()
+# model.fit(X_train, y_train)
+# model.score(X_test, y_test)
 ```
 
 ```python
@@ -244,16 +244,9 @@ dummies
 <!-- #endraw -->
 
 ```python
-# Let's refit the model
-# Use transformed_x
-X_train, X_test, y_train, y_test = train_test_split(transformed_x, y, test_size=0.2)
-model.fit(X_train, y_train)
-```
-
-```python
 # 因為汽車的價格無法從顏色、廠牌、車門數來做出準確預測所以分數很低, 
 # 但本節重點在於如何將廢數據化的資料轉換為數字
-model.score(X_test, y_test)https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
+# model.score(X_test, y_test)
 ```
 
 ### 1.2 What if where missing values)?
@@ -283,11 +276,11 @@ y = car_sales_missing['Price']
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
-categorical_features = ['Make', 'Colour', 'Doors']
-one_hot = OneHotEncoder()
-transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
-transformed_x = transformer.fit_transform(X)
-pd.DataFrame(transformed_x)
+# categorical_features = ['Make', 'Colour', 'Doors']
+# one_hot = OneHotEncoder()
+# transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
+# transformed_x = transformer.fit_transform(X)
+# pd.DataFrame(transformed_x)
 ```
 
 ### Option 1:Fill missing data with Pandas
@@ -363,8 +356,8 @@ car_sales_missing.dropna(subset=['Price'], inplace=True)
 # Split into X ＆ y
 X = car_sales_missing.drop('Price', axis=1)
 y = car_sales_missing['Price']
-
 ```
+
 
 ```python
 # Fill missing values with Scilit-Learn
@@ -420,8 +413,8 @@ X_train, X_test, y_train, y_test = train_test_split(transformed_X, y, test_size=
 model = RandomForestRegressor()
 model.fit(X_train, y_train)
 model.score(X_test, y_test)
-
 ```
+
 
 ### Option 2: Filling missing data and transforming categorical data with Scikit-Learn
 This notebook updates the code in the "Getting Your Data Ready: Handling Missing Values in Scikit-Learn".
@@ -555,7 +548,7 @@ transformed_X_test = transformer.transform(car_sales_filled_test)
 transformed_X_train.toarray()
 ```
 
-Fit a model
+### Fit a model
 Wonderful! Now we've filled and transformed our data, ensuring the training and test sets have been kept separate. Let's fit a model to the training set and evaluate it on the test set.
 
 ```python
@@ -569,4 +562,74 @@ model = RandomForestRegressor()
 # Make sure to use transformed (filled and one-hot encoded X data)
 model.fit(transformed_X_train, y_train)
 model.score(transformed_X_test, y_test)
+```
+
+## 2. Choose the right estimator/algorithm for our problem
+* estimator/algorithm = machine learning model in scikit-learn
+* Classification - predicting whether a sample is on thing or another.
+* Regression - predicting a number
+* [scikit-learn ml map](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+
+### 2.1 Picking a mcachine learning model for a regression problem
+
+```python
+# Import Boston housing dataset
+from sklearn.datasets import load_boston
+boston = load_boston()
+boston
+```
+
+```python
+boston_df = pd.DataFrame(boston['data'], columns=boston['feature_names'])
+boston_df['target'] = pd.Series(boston['target'])
+```
+
+```python
+boston_df.head()
+```
+
+```python
+# How many data ?
+len(boston_df)
+```
+
+```python
+# Let's try the Ridge Regression model
+from sklearn.linear_model import Ridge
+
+# Setup random seed
+np.random.seed(42)
+
+# Create the data
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+
+# Split into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Instantiate Ridge model
+model = Ridge()
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+```
+
+
+How do we improve the score?
+What if Ridge wasn't working?
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
 ```
