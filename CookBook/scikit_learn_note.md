@@ -244,16 +244,9 @@ dummies
 <!-- #endraw -->
 
 ```python
-# Let's refit the model
-# Use transformed_x
-X_train, X_test, y_train, y_test = train_test_split(transformed_x, y, test_size=0.2)
-model.fit(X_train, y_train)
-```
-
-```python
 # 因為汽車的價格無法從顏色、廠牌、車門數來做出準確預測所以分數很低, 
 # 但本節重點在於如何將廢數據化的資料轉換為數字
-model.score(X_test, y_test)
+# model.score(X_test, y_test)
 ```
 
 ### 1.2 What if where missing values)?
@@ -283,11 +276,11 @@ y = car_sales_missing['Price']
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
-categorical_features = ['Make', 'Colour', 'Doors']
-one_hot = OneHotEncoder()
-transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
-transformed_x = transformer.fit_transform(X)
-pd.DataFrame(transformed_x)
+# categorical_features = ['Make', 'Colour', 'Doors']
+# one_hot = OneHotEncoder()
+# transformer = ColumnTransformer([('one_hot', one_hot, categorical_features)], remainder='passthrough')
+# transformed_x = transformer.fit_transform(X)
+# pd.DataFrame(transformed_x)
 ```
 
 ### Option 1:Fill missing data with Pandas
@@ -594,6 +587,47 @@ boston_df['target'] = pd.Series(boston['target'])
 
 ```python
 boston_df.head()
+```
+
+```python
+# How many data ?
+len(boston_df)
+```
+
+```python
+# Let's try the Ridge Regression model
+from sklearn.linear_model import Ridge
+
+# Setup random seed
+np.random.seed(42)
+
+# Create the data
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+
+# Split into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Instantiate Ridge model
+model = Ridge()
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+```
+
+
+How do we improve the score?
+What if Ridge wasn't working?
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
 ```
 
 ```python
