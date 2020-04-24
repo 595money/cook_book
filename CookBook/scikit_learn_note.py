@@ -164,7 +164,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 # %%
-X_train.shape, X_test.shape, y_train.shape, y_test.shapehttps://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 # %% [markdown]
 # Clean Data  
@@ -195,10 +195,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # %%
 # Build machine learning model
-from sklearn.ensemble import RandomForestRegressor
-model = RandomForestRegressor()
-model.fit(X_train, y_train)
-model.score(X_test, y_test)
+# from sklearn.ensemble import RandomForestRegressor
+# model = RandomForestRegressor()
+# model.fit(X_train, y_train)
+# model.score(X_test, y_test)
 
 # %%
 
@@ -228,7 +228,7 @@ model.fit(X_train, y_train)
 # %%
 # 因為汽車的價格無法從顏色、廠牌、車門數來做出準確預測所以分數很低, 
 # 但本節重點在於如何將廢數據化的資料轉換為數字
-model.score(X_test, y_test)https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
+model.score(X_test, y_test)
 
 # %% [markdown]
 # ### 1.2 What if where missing values)?
@@ -509,7 +509,7 @@ transformed_X_test = transformer.transform(car_sales_filled_test)
 transformed_X_train.toarray()
 
 # %% [markdown]
-# Fit a model
+# ### Fit a model
 # Wonderful! Now we've filled and transformed our data, ensuring the training and test sets have been kept separate. Let's fit a model to the training set and evaluate it on the test set.
 
 # %%
@@ -523,3 +523,28 @@ model = RandomForestRegressor()
 # Make sure to use transformed (filled and one-hot encoded X data)
 model.fit(transformed_X_train, y_train)
 model.score(transformed_X_test, y_test)
+
+# %% [markdown]
+# ## 2. Choose the right estimator/algorithm for our problem
+# * estimator/algorithm = machine learning model in scikit-learn
+# * Classification - predicting whether a sample is on thing or another.
+# * Regression - predicting a number
+# * [scikit-learn ml map](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+# %% [markdown]
+# ### 2.1 Picking a mcachine learning model for a regression problem
+
+# %%
+# Import Boston housing dataset
+from sklearn.datasets import load_boston
+boston = load_boston()
+boston
+
+# %%
+boston_df = pd.DataFrame(boston['data'], columns=boston['feature_names'])
+boston_df['target'] = pd.Series(boston['target'])
+
+# %%
+boston_df.head()
+
+# %%

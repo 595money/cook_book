@@ -182,7 +182,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 ```python
-X_train.shape, X_test.shape, y_train.shape, y_test.shapehttps://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
 ```
 
 Clean Data  
@@ -216,10 +216,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 ```python
 # Build machine learning model
-from sklearn.ensemble import RandomForestRegressor
-model = RandomForestRegressor()
-model.fit(X_train, y_train)
-model.score(X_test, y_test)
+# from sklearn.ensemble import RandomForestRegressor
+# model = RandomForestRegressor()
+# model.fit(X_train, y_train)
+# model.score(X_test, y_test)
 ```
 
 ```python
@@ -253,7 +253,7 @@ model.fit(X_train, y_train)
 ```python
 # 因為汽車的價格無法從顏色、廠牌、車門數來做出準確預測所以分數很低, 
 # 但本節重點在於如何將廢數據化的資料轉換為數字
-model.score(X_test, y_test)https://github.com/mrdbourke/zero-to-mastery-ml/blob/master/section-2-data-science-and-ml-tools/introduction-to-scikit-learn-video.ipynb
+model.score(X_test, y_test)
 ```
 
 ### 1.2 What if where missing values)?
@@ -363,8 +363,8 @@ car_sales_missing.dropna(subset=['Price'], inplace=True)
 # Split into X ＆ y
 X = car_sales_missing.drop('Price', axis=1)
 y = car_sales_missing['Price']
-
 ```
+
 
 ```python
 # Fill missing values with Scilit-Learn
@@ -420,8 +420,8 @@ X_train, X_test, y_train, y_test = train_test_split(transformed_X, y, test_size=
 model = RandomForestRegressor()
 model.fit(X_train, y_train)
 model.score(X_test, y_test)
-
 ```
+
 
 ### Option 2: Filling missing data and transforming categorical data with Scikit-Learn
 This notebook updates the code in the "Getting Your Data Ready: Handling Missing Values in Scikit-Learn".
@@ -555,7 +555,7 @@ transformed_X_test = transformer.transform(car_sales_filled_test)
 transformed_X_train.toarray()
 ```
 
-Fit a model
+### Fit a model
 Wonderful! Now we've filled and transformed our data, ensuring the training and test sets have been kept separate. Let's fit a model to the training set and evaluate it on the test set.
 
 ```python
@@ -569,4 +569,33 @@ model = RandomForestRegressor()
 # Make sure to use transformed (filled and one-hot encoded X data)
 model.fit(transformed_X_train, y_train)
 model.score(transformed_X_test, y_test)
+```
+
+## 2. Choose the right estimator/algorithm for our problem
+* estimator/algorithm = machine learning model in scikit-learn
+* Classification - predicting whether a sample is on thing or another.
+* Regression - predicting a number
+* [scikit-learn ml map](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+
+### 2.1 Picking a mcachine learning model for a regression problem
+
+```python
+# Import Boston housing dataset
+from sklearn.datasets import load_boston
+boston = load_boston()
+boston
+```
+
+```python
+boston_df = pd.DataFrame(boston['data'], columns=boston['feature_names'])
+boston_df['target'] = pd.Series(boston['target'])
+```
+
+```python
+boston_df.head()
+```
+
+```python
+
 ```
