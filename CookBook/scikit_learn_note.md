@@ -615,21 +615,193 @@ model.score(X_test, y_test)
 ```
 
 
-How do we improve the score?
-What if Ridge wasn't working?
+How do we improve the score?  
+What if Ridge wasn't working?  
+Let's refer bsck to the map ... [see also](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 ```python
+# Let's try the Random Forst Regressor
+from sklearn.ensemble import RandomForestRegressor
+
+# Setup random seed
+np.random.seed(42)
+
+# Create the data
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Insstatiate Random forset Regressor
+rf = RandomForestRegressor()
+rf.fit(X_train, y_train)
+
+# Evaluate the Random Forest Regressor
+rf.score(X_test, y_test)
+```
+
+```python
+# Check the ridge model again
+model.score(X_test, y_test)
+```
+
+### 2.2 Choosing and estimator for a classification problem
+Let's go to the map...[see also](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+```python
+heart_disease = pd.read_csv('../data/heart-disease.csv')
+len(heart_disease)
+```
+
+Consulting the map and it says to try `LinearSVC`.
+
+```python
+# Import the RandomForestClassifier estimator class
+from sklearn.ensemble import RandomForestClassifier
+
+# Setup random seed
+np.random.seed(42)
+
+# Make the data
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Instantiate RandomForestClassifier
+clf = RandomForestClassifier()
+clf.fit(X_train, y_train)
+
+# Evaluate the RandomForestClassifier
+clf.score(X_test, y_test)
+```
+
+
+Tidbit:
+    1. If you have structured data, used ensemble methods
+    2. If you have unstructured data, use deep learning or transfer learning
+
+<!-- #region -->
+## 3. Fit the model/algorithm and use it to make predictions on our data  
+
+
+### 3.1 Fitting the model to the data
+
+Different names for:
+* X = features, features variables, data
+* y = labels, targets, target variables
+<!-- #endregion -->
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+# Setup random seed
+np.random.seed(42)
+
+# Make the data
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Instantiate RandomForestClassifier
+clf = RandomForestClassifier()
+
+# Fit the model to the data (training the machine learning model)
+clf.fit(X_train, y_train)
+
+# Evaluate the RandomForestClassifier (use the patterns the model has learned)
+clf.score(X_test, y_test)
+```
+
+```python
+X.head()
+```
+
+### 3.2 Make predictions using a machine learning model
+
+2 way to make predictions:
+1. `predict()`
+2. `predict_proba()`
+
+```python
+# Use a trained model to make predictions
+```
+
+```python
+clf.predict(X_test)
+```
+
+```python
+np.array(y_test)
+```
+
+```python
+# Compare predictions to truth labels to evaluate the model
+y_preds = clf.predict(X_test)
+np.mean(y_preds == y_test)
+```
+
+```python
+clf.score(X_test, y_test)
+```
+
+```python
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test, y_preds)
+```
+
+Make predictions with predict_proba()
+
+
+```python
+# predict_proba() returns probabilities of a calssification label
+clf.predict_proba(X_test[:5])
+```
+
+```python
+# Let's predict() on the same data...
+clf.predict(X_test[:5])
+```
+
+`predict()` can also be used for regression models.
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+np.random.seed(42)
+
+# Create the data
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Instantiate and fit model
+model = RandomForestRegressor().fit(X_train, y_train)
+
+# Make predictions
+y_preds = model.predict(X_test)
 
 ```
 
 ```python
-
+y_preds[:10]
 ```
 
 ```python
-
+# y_test is Answer
+np.array(y_test[:10])
 ```
 
 ```python
+# Compare the predictions to the truth
+from sklearn.metrics import mean_absolute_error
+from typing import List
 
+#平均絕對誤差 mean absolute error
+mean_absolute_error(y_test, y_preds)
 ```
