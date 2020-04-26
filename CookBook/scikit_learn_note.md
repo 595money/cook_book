@@ -154,6 +154,7 @@ for i in range(10, 100, 10):
 ```
 
 ## 1. Getting our data ready to be used with machine learning
+將data處理好已進入機器學習  
 
 Three main things we have to do:
     1. Split the data into features and labels (usully `X` & `y`)
@@ -565,6 +566,7 @@ model.score(transformed_X_test, y_test)
 ```
 
 ## 2. Choose the right estimator/algorithm for our problem
+根據要處理的問題選擇使用的機器學習模型
 * estimator/algorithm = machine learning model in scikit-learn
 * Classification - predicting whether a sample is on thing or another.
 * Regression - predicting a number
@@ -785,8 +787,8 @@ model = RandomForestRegressor().fit(X_train, y_train)
 
 # Make predictions
 y_preds = model.predict(X_test)
-
 ```
+
 
 ```python
 y_preds[:10]
@@ -804,4 +806,234 @@ from typing import List
 
 #平均絕對誤差 mean absolute error
 mean_absolute_error(y_test, y_preds)
+```
+
+### 4. Evaluating a machine learning modle
+
+Three ways to evaluate Scikit-Learn models/esitmators:  
+評估機器學習模型
+1. Estimator `score` method 
+2. The `scoring` parameter
+3. Problem-specific metric functions.  
+
+### 4.1 Evaluation a model with the score method
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+np.random.seed(42)
+
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+clf = RandomForestClassifier()
+clf.fit(X_train, y_train)
+clf.score(X_train, y_train)
+```
+
+```python
+clf.score(X_test, y_test)
+```
+
+Let's do the same but for regreesion...
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+np.random.seed(42)
+
+# Create the data
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Instantiate and fit model
+model = RandomForestRegressor().fit(X_train, y_train)
+```
+
+```python
+model.score(X_test, y_test)
+```
+
+### 4.2 Evaluating a model using the `scoring` parameter
+
+```python
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+np.random.seed(42)
+
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+clf = RandomForestClassifier()
+clf.fit(X_train, y_train)
+clf.score(X_test, y_test)
+```
+
+```python
+# clf = train model
+# X = feature
+# y = label
+cross_val_score(clf, X, y)
+```
+
+```python
+np.random.seed(42)
+# Single training and test split score
+clf_single_score = clf.score(X_test, y_test)
+
+# Take the mean of 5-fold cross-validation score
+clf_cross_val_score = np.mean(cross_val_score(clf, X, y))
+
+# Compare the two
+clf_single_score, clf_cross_val_score
+```
+
+```python
+# Scoring parameter set to None by default
+# 當cross_val_score參數位給scoring時, 預設為None,
+# 而 scoring = None (預設), 則會帶入 scoring = clf.score()
+# 此處的 clf 是 RandomForestClassifier, 所以預設scoring 是 mean accuracy
+# Default scoring parameter of classifier = mean accuracy
+# clf.score() = mean accuracy
+
+cross_val_score(clf, X, y, cv=5, scoring=None)
+```
+
+### 4.2.1 Classification model evaluation metrics
+1. Accuracy
+2. Area umder ROC curve
+3. Confusion matrix
+4. Classification report
+
+**Accuracy**
+
+```python
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+
+np.random.seed(42)
+
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+
+clf = RandomForestClassifier()
+cross_val_score = cross_val_score(clf, X, y)
+```
+
+```python
+np.mean(cross_val_score)
+```
+
+```python
+print(f'Heart Disease Classifier Cross-Validated Accuracy:{np.mean(cross_val_score) * 100:.2f}%')
+```
+
+**Area under the receiver operating characteristic curve (AUC/ROC)**
+* Area under curve (AUC)
+* ROC curve
+* [see also](https://en.wikipedia.org/wiki/Receiver_operating_characteristic)
+
+ROC curves are a comparison of a model's true postive rate (tpr) versus a models false positive rate (fpr).
+
+* True positive = model predicts 1 when truth is 1 
+* False positive = model predicts 1 when truth is 0  
+* True negative = model predicts 0 when truth is 0
+* Flase negative = model predicts 0 when true is 1
+
+```python
+# Create X_test... etc
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+```
+
+```python
+from sklearn.metrics import roc_curve
+
+# Fit the classifier
+clf.fit(X_train, y_train)
+
+# Make predictions with probabilities
+y_probs = clf.predict_proba(X_test)
+y_probs[:10], len(y_probs)
+```
+
+```python
+y_probs_positive = y_probs[:, 1]
+y_probs_positive[:10]
+```
+
+```python
+# Caculate fpr, tpr and thresholds
+# fpr = FP / (FP + TN) 在所有實際陰性樣本中被誤判為陽性的比率, T = 猜對, P = 實際是陽性
+# tpr = TP / (TP + FN) 在所有實際陽性樣本中正確判定陽性的比率, F = 猜錯, P = 實際是陽性
+fpr, tpr, thresholds = roc_curve(y_test, y_probs_positive)
+
+# Check the false positive rates
+fpr
+```
+
+```python
+# Create a function for plotting ROC curves
+import matplotlib.pyplot as plt
+
+def plot_roc_curve(fpr, tpr):
+    '''
+    Plots a ROC curve given the false positive rate (fpr)
+    and true positive rate (tpr) of a model.
+    '''
+    # Plot roc 
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    
+    # Plot line with no predictive power (baseline) 繪製一條沒有進行預測的基準線來比較
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--', label='Guessing')
+    
+    # Customize the plot
+    plt.xlabel('False positive rate (fpr)')
+    plt.ylabel('True positive rate (tpr)')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
+    
+plot_roc_curve(fpr, tpr)
+
+
+
+```
+
+```python
+from sklearn.metrics import roc_auc_score
+roc_auc_score(y_test, y_probs_positive)
+```
+
+```python
+# Plot perfect ROC curve and AUC score
+fpr, tpr, thresholds = roc_curve(y_test, y_test)
+plot_roc_curve(fpr, tpr)
+```
+
+```python
+# Perfect AUC score
+roc_auc_score(y_test, y_test)
+```
+
+**Confusion Matrix**  
+A confusion matrix is a quick way to compare the labels a model predicts and the actual labels it was supposed to predict.  
+混淆矩陣是比較模型預測的標籤和模型應預測的實際標籤的快速方法。
+  
+In essence, giving you an idea of where the model is getting confused.  
+從本質上講，讓您了解模型的混亂之處
+
+```python
+from sklearn.metrics import confusion_matrix
+y_preds = clf.predict(X_test)
+
+confusion_matrix(y_test, y_preds)
+```
+
+```python
+# Visualize confusion matrix with pd.crosstab()
+pd.crosstab(y_test,
+           y_preds,
+           rownames=['Actual Labels'],
+           colnames=['Predicted Labels'])
 ```
