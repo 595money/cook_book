@@ -1025,8 +1025,10 @@ In essence, giving you an idea of where the model is getting confused.
 
 ```python
 from sklearn.metrics import confusion_matrix
-y_preds = clf.predict(X_test)
 
+# y_test = test sets 的 label
+# y_preds = 使用 X_test 進行預測得到的 y_preds
+y_preds = clf.predict(X_test)
 confusion_matrix(y_test, y_preds)
 ```
 
@@ -1037,3 +1039,71 @@ pd.crosstab(y_test,
            rownames=['Actual Labels'],
            colnames=['Predicted Labels'])
 ```
+
+```python
+# install seaborn
+# How install a conda package into the current envrionment from a Jupyter Notebook
+# import sys
+# !conda install --yes --prefix {sys.prefix} seaborn
+```
+
+```python
+
+```
+
+```python
+# Make our confusion matrix more visual with Seaborn's heatmp()
+import seaborn as sns
+
+# Set the font scale
+sns.set(font_scale=1.5)
+
+# Create a confusion martix
+conf_mat = confusion_matrix(y_test, y_preds)
+
+# Plot it using Seaborn
+sns.heatmap(conf_mat);
+
+```
+
+```python
+def plot_conf_mat(conf_mat):
+    '''
+    Plots a confusion matrix ustin Seaborn's heatmap()
+    '''
+    fig, ax = plt.subplots(figsize=(3, 3))
+    ax = sns.heatmap(conf_mat,
+                    annot=True, # Annotate the boxes with conf_mat info
+                     cbar=False)
+    plt.xlabel('Predicted label')
+    plt.ylabel('True label');
+
+plot_conf_mat(conf_mat)
+    
+```
+
+```python
+from sklearn.metrics import plot_confusion_matrix
+plot_confusion_matrix(clf, X_test, y_test);
+```
+
+**Classification report**
+
+```python
+from sklearn.metrics import classification_report
+
+# y_test = test sets 的 label
+# y_preds = 使用 X_test 進行預測得到的 y_preds
+# 將y_test 與 y_preds進行比較
+print(classification_report(y_test, y_preds))
+
+```
+
+1:41 記得重看
+Precision  
+Recall  
+F1-score  
+Suppot  
+Accuracy  
+Macro avg  
+Weighter abg  
