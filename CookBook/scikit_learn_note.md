@@ -7,7 +7,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.4.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -1063,7 +1063,6 @@ conf_mat = confusion_matrix(y_test, y_preds)
 
 # Plot it using Seaborn
 sns.heatmap(conf_mat);
-
 ```
 
 ```python
@@ -1079,8 +1078,8 @@ def plot_conf_mat(conf_mat):
     plt.ylabel('True label');
 
 plot_conf_mat(conf_mat)
-    
 ```
+
 
 ```python
 from sklearn.metrics import plot_confusion_matrix
@@ -1096,14 +1095,298 @@ from sklearn.metrics import classification_report
 # y_preds = 使用 X_test 進行預測得到的 y_preds
 # 將y_test 與 y_preds進行比較
 print(classification_report(y_test, y_preds))
-
 ```
 
+
 1:41 記得重看
-Precision  
-Recall  
-F1-score  
-Suppot  
-Accuracy  
+Precision = TP/ (TP + FP)   
+Recall = TP/(TP + FN)  
+F1-score = 2* (P*R)/(P+R)  
+Suppot = 樣本數  
+Accuracy   
 Macro avg  
-Weighter abg  
+Weighter abg   
+
+```python
+# Where precision and recall become valuable
+disease_true = np.zeros(10000)
+disease_true[0] = 1 # only one positive case
+
+disease_preds = np.zeros(10000) # model predicts every case as 0
+
+pd.DataFrame(classification_report(disease_true,
+                                  disease_preds,
+                                  output_dict=True))
+```
+
+To summarize classification metrics:
+ * **Accuracy** is a good measure to start with if all classes are balanced (e.g. same amount of samples which are labelled with 0 or 1).  
+ ##### 如果類別間的樣本數均達到平衡（例如，標有0或1的相同數量的樣本）可以安心使用
+ * **Precision** and **recall** become more important when classes are imbalanced.
+ ##### 如果類別間的樣本書不平衡時, 精確度與召回率變得更加重要
+ * if false positive predictions are worse than false negatives, aim for higher precision.  
+ ##### 如果FP比FN差, 提高精確度的加權
+ * if false negative predictions are worse than false positives, aim for higher recall.  
+ ##### 如果FN比FP差, 提高召回率的加權
+ * **F1-score** is a combination of precision and recall.
+
+
+### 4.2.2 Regression model evaluation metrics
+
+Model evaluation metrics documentation - [see also](https://scikit-learn.org/stable/modules/model_evaluation.html) [cn](https://sklearn.apachecn.org/docs/master/32.html)
+
+1. R^2 (pronounced r-squared) or coefficient of determination.
+2. Mean absolute error (MAE)
+3. Mean suqared error (MSE)
+4. perfectly is max(R^2) & min(MAE) & min(MSE)  
+  
+**R^2**  
+What R-squared does: Compares your model predictions to the mean of the targets. Values can range from negative infinity (a very poor model) to 1. Forexample, if all your model does is predict the mean of the targets, it's R^2 value woule be 0. And if your model perfectly predicts a range of numbers it's R^2 value would be 1.
+
+##### R平方的作用：
+#### 將模型預測與目標均值進行比較。值的範圍可以從負無窮大（非常差的模型）到1。 
+##### 例如，如果您的所有模型所做的都是預測目標的均值，則R ^ 2值將為0。
+##### 並且，如果您的模型完美地預測了數字範圍，則為R ^ 2的值為1。
+
+描述出數值怎樣算好?
+接近0與接近１代表甚麼意思？
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+np.random.seed(42)
+
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+model = RandomForestRegressor()
+model.fit(X_train, y_train)
+```
+
+```python
+# default R^2
+model.score(X_test, y_test)
+```
+
+```python
+from sklearn.metrics import r2_score
+
+# Fill an array with y_test mean
+y_test_mean = np.full(len(y_test), y_test.mean())
+y_test_mean
+```
+
+```python
+# Model only predicting the mean gets an R^2 score of 0
+r2_score(y_test, y_test_mean)
+```
+
+```python
+# Model predicting perfectly the correct values gets an R^2 scroe of 1
+r2_score(y_test, y_test)
+```
+
+**Mean absolue error(MAE)**  
+MAE is the average of the aboslute differences between predictions and actual values.  
+##### MAE 為預測值與實際值的差異絕對值的平均,
+It gives you an idea of how wrong your models predictions are.
+##### 可以用來了解model 預測的錯誤程度  
+
+```python
+# Mean absolute error
+y_preds = model.predict(X_test)
+mae = mean_absolute_error(y_test, y_preds)
+df = pd.DataFrame(data={'actual values': y_test,
+                       'predicted values': y_preds})
+df['differences'] = abs(df['predicted values'] - df['actual values'])
+df
+```
+
+**Mean Squared error (MSE)**
+
+```python
+# Mean Squared error
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, y_preds)
+mse
+```
+
+```python
+squared = np.square(df['differences'])
+squared.mean()
+```
+
+### 4.2.3 Finally using the `scoring` parameter
+
+```python
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+np.random.seed(42)
+
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+clf = RandomForestClassifier()
+```
+
+```python
+np.random.seed(42)
+cv_acc = cross_val_score(clf, X, y, scoring=None)
+# Cross-validated accuracy
+print(f'The cross-validated accuracy is: {np.mean(cv_acc) * 100 :.2f}%')
+```
+
+```python
+np.random.seed(42)
+cv_acc = cross_val_score(clf, X, y, scoring='accuracy')
+# Cross-validated accuracy
+print(f'The cross-validated accuracy is: {np.mean(cv_acc) * 100 :.2f}%')
+```
+
+```python
+# Precision
+np.random.seed(42)
+cv_precision = cross_val_score(clf, X, y, scoring='precision')
+np.mean(cv_precision)
+```
+
+```python
+# Recall
+cv_recall = cross_val_score(clf, X, y, scoring='recall')
+np.mean(cv_recall)
+```
+
+```python
+# F1
+cv_f1 = cross_val_score(clf, X, y, scoring='f1')
+np.mean(cv_f1)
+```
+
+How about out regression model?
+
+```python
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestRegressor
+np.random.seed(42)
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+model = RandomForestRegressor()
+```
+
+```python
+# R^2
+np.random.seed(42)
+cv_r2 = cross_val_score(model, X, y, cv=5, scoring=None)
+np.mean(cv_r2)
+```
+
+```python
+# R^2
+np.random.seed(42)
+cv_r2 = cross_val_score(model, X, y, cv=5, scoring='r2')
+np.mean(cv_r2)
+```
+
+```python
+# Mean absolute error (MAE)
+# 遵循一貫作風高分比低分好, 所以MAE與MSE等都改為return negtive score
+np.random.seed(42)
+cv_mae = cross_val_score(model, X, y, scoring='neg_mean_absolute_error')
+np.mean(cv_mae)
+```
+
+```python
+# Mean squared error (MSE)
+np.random.seed(42)
+cv_mse = cross_val_score(model, X, y, cv=5, scoring='neg_mean_squared_error')
+np.mean(cv_mse)
+```
+
+### 4.3 Using different evaluation metrics as Scikit-Learn functions  
+**Classification evaluation functions**
+
+
+```python
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+np.random.seed(42)
+X = heart_disease.drop('target', axis=1)
+y = heart_disease['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+clf = RandomForestClassifier()
+clf.fit(X_train, y_train)
+
+# Make some predictions
+y_preds = clf.predict(X_test)
+
+# Evaluate the classifier
+print('Classifier metrics on the test set')
+print(f'Accuracy: {accuracy_score(y_test, y_preds) * 100:.2f}%')
+print(f'Precision: {precision_score(y_test, y_preds) * 100:.2f}%')
+print(f'Recall: {recall_score(y_test, y_preds) * 100:.2f}%')
+print(f'F1: {f1_score(y_test, y_preds) * 100:.2f}%')
+```
+
+**Regression evaluation functions**
+
+```python
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+
+np.random.seed(42)
+X = boston_df.drop('target', axis=1)
+y = boston_df['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = RandomForestRegressor()
+model.fit(X_train, y_train)
+
+# Make predictions using our regression model
+y_preds = model.predict(X_test)
+
+# Evaluate the regression model
+
+print('Regression metrics on the test set')
+print(f'R^2: {r2_score(y_test, y_preds) * 100:.2f}%')
+print(f'MAE: {mean_absolute_error(y_test, y_preds)}')
+print(f'MSE: {mean_squared_error(y_test, y_preds)}')
+```
+
+## 5. Improving a model
+由於做了初次預測後, 會開始對預測結果進行優化,
+所以初次預測的成果也會是基準.
+
+First predictions = baseline prediction.  
+First model = baseline model.  
+
+From a data perspective:
+* Could we collect more data ? (generally, the more, the better)
+* Could we improve our data?
+
+From a model perspective:
+* Is there a better model we could use?
+* Could we improve the current model?
+
+Hyperparameters vs. Parameters
+* Parameters = model find theese patterns in data
+* Hyperparameters = settings on a model you can adjust to (potentially) improve it's ability to find patterns
+
+
+Three ways to adjust hyperparameters:
+1. By hand
+2. Randomly with RandomSearchCV
+3. Exhaustively with GridSearchCV
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+clf = RandomForestClassifier()
+clf.get_params()
+```
+
+```python
+
+```
