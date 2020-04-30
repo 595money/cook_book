@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import pandas as pd
-
+import pathlib
+from os import walk
 
 def execute():
     # 1. 取得time_sheet_path
@@ -30,4 +31,9 @@ def execute():
 
 
 if __name__ == '__main__':
+    now_path = pathlib.Path().absolute()
+    f = []
+    for (dir_path, dir_names, file_names) in walk(now_path):
+        f.extend(file_names)
+        break
     execute()
