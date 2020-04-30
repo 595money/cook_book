@@ -74,6 +74,7 @@ $\partial$|`$\partial$`|partial
 :---|---|--
 $\sum$ |`$\sum$`|求和公式
 $\sum_{i=123}^n$|`$\sum_{i=123}^n$` |求和上下標
+$$\sum_{n=1}^{\infty} 2^{-n} = 1$$
 $y=\begin{cases}x\\\alpha\end{cases}$|`$y=\begin{cases}x\\\alpha\end{cases}$`|大括號
 $\times$|`$\times$`|乘號
 $\div$|`$\div$`|除號
