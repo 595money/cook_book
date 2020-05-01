@@ -26,18 +26,18 @@
 first = [
     'Clean Data',
     'Transform Data',
-    'Reduce Data'   
+    'Reduce Data'
 ]
 
-what_were_covering = [  
-  "0. An end-to-end Scikit-Learn workflow",
-  "1. Getting the data ready",
-  "2. Choose the right estimator/algorithm for our problem",
-  "3. Fit the model/algorithm and use it to make predictions on our data",
-  "4. Evaluating a model",
-  "5. Improve a model",
-  "6. Save and load a trained model",
-  "7. Putting it all together!"]
+what_were_covering = [
+    "0. An end-to-end Scikit-Learn workflow",
+    "1. Getting the data ready",
+    "2. Choose the right estimator/algorithm for our problem",
+    "3. Fit the model/algorithm and use it to make predictions on our data",
+    "4. Evaluating a model",
+    "5. Improve a model",
+    "6. Save and load a trained model",
+    "7. Putting it all together!"]
 
 # %%
 # Standard imports
@@ -46,6 +46,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from jupyterthemes import jtplot
 from IPython.core.display import display, HTML
+
 # %matplotlib inline
 
 display(HTML("<style>.container { width:80% !important; }</style>"))
@@ -55,7 +56,7 @@ jtplot.style()
 # ## An end-to-end Scikit_learn workflow
 
 # %%
-#1. Get the data ready
+# 1. Get the data ready
 heart_disease = pd.read_csv('../data/heart-disease.csv')
 heart_disease
 
@@ -76,6 +77,7 @@ y
 # 以及 b.我們需要有hyperparameters 來對model進行調整
 # 因此使用 RandomForestClassifier (有a、b 兩特性)
 from sklearn.ensemble import RandomForestClassifier
+
 clf = RandomForestClassifier()
 
 # We'll keep the default hyperparameters
@@ -89,7 +91,7 @@ from sklearn.model_selection import train_test_split
 # X = heart_disease.drop('target', axis=1) (input)
 # y = heart_disease['target'] (output)
 # 0.2 = 80% data will be userd for training
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2) 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # %%
 # X = features/input, y = label/output
@@ -113,6 +115,7 @@ clf.score(X_test, y_test)
 
 # %%
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+
 print(classification_report(y_test, y_preds))
 
 # %%
@@ -161,6 +164,7 @@ y.head()
 # %%
 # Split the data into training and test sets
 from sklearn.model_selection import train_test_split
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
@@ -282,8 +286,6 @@ car_sales_missing.isna().sum()
 # 因為 Price 是 label, 當 label缺失時, 將無法準確訓練model
 car_sales_missing.dropna(inplace=True)
 
-
-
 # %%
 car_sales_missing.isna().sum()
 
@@ -340,8 +342,8 @@ door_feature = ['Doors']
 num_features = ['Odometer (KM)']
 
 # Create an imputer (something that fills missing data)
-imputer = ColumnTransformer([('cat_imputer', cat_imputer, cat_features), 
-                             ('door_imputer', door_imputer, door_feature), 
+imputer = ColumnTransformer([('cat_imputer', cat_imputer, cat_features),
+                             ('door_imputer', door_imputer, door_feature),
                              ('num_imputer', num_imputer, num_features)])
 
 # Transform the data
@@ -354,13 +356,14 @@ car_sales_filled.head()
 
 # %%
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer 
+from sklearn.compose import ColumnTransformer
+
 categorical_features = ['Make', 'Colour', 'Doors']
 one_hot = OneHotEncoder()
-transformer = ColumnTransformer([('one_hot', 
-                                  one_hot, 
+transformer = ColumnTransformer([('one_hot',
+                                  one_hot,
                                   categorical_features)],
-                               remainder='passthrough')
+                                remainder='passthrough')
 transformed_X = transformer.fit_transform(car_sales_filled)
 transformed_X
 
@@ -388,6 +391,7 @@ model.score(X_test, y_test)
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
 # %matplotlib inline
 
 # %%
@@ -462,10 +466,10 @@ filled_X_train
 
 # %%
 # Get our transformed data array's back into DataFrame's
-car_sales_filled_train = pd.DataFrame(filled_X_train, 
+car_sales_filled_train = pd.DataFrame(filled_X_train,
                                       columns=["Make", "Colour", "Doors", "Odometer (KM)"])
 
-car_sales_filled_test = pd.DataFrame(filled_X_test, 
+car_sales_filled_test = pd.DataFrame(filled_X_test,
                                      columns=["Make", "Colour", "Doors", "Odometer (KM)"])
 
 # Check missing data in training set
@@ -491,10 +495,10 @@ from sklearn.preprocessing import OneHotEncoder
 # Now let's one hot encode the features with the same code as before 
 categorical_features = ["Make", "Colour", "Doors"]
 one_hot = OneHotEncoder()
-transformer = ColumnTransformer([("one_hot", 
-                                 one_hot, 
-                                 categorical_features)],
-                                 remainder="passthrough")
+transformer = ColumnTransformer([("one_hot",
+                                  one_hot,
+                                  categorical_features)],
+                                remainder="passthrough")
 
 # Fill train and test values separately
 transformed_X_train = transformer.fit_transform(car_sales_filled_train)
@@ -533,6 +537,7 @@ model.score(transformed_X_test, y_test)
 # %%
 # Import Boston housing dataset
 from sklearn.datasets import load_boston
+
 boston = load_boston()
 boston
 
@@ -696,6 +701,7 @@ clf.score(X_test, y_test)
 
 # %%
 from sklearn.metrics import accuracy_score
+
 accuracy_score(y_test, y_preds)
 
 # %% [markdown]
@@ -715,6 +721,7 @@ clf.predict(X_test[:5])
 
 # %%
 from sklearn.ensemble import RandomForestRegressor
+
 np.random.seed(42)
 
 # Create the data
@@ -743,7 +750,7 @@ np.array(y_test[:10])
 from sklearn.metrics import mean_absolute_error
 from typing import List
 
-#平均絕對誤差 mean absolute error
+# 平均絕對誤差 mean absolute error
 mean_absolute_error(y_test, y_preds)
 
 # %% [markdown]
@@ -759,6 +766,7 @@ mean_absolute_error(y_test, y_preds)
 
 # %%
 from sklearn.ensemble import RandomForestClassifier
+
 np.random.seed(42)
 
 X = heart_disease.drop('target', axis=1)
@@ -776,6 +784,7 @@ clf.score(X_test, y_test)
 
 # %%
 from sklearn.ensemble import RandomForestRegressor
+
 np.random.seed(42)
 
 # Create the data
@@ -797,6 +806,7 @@ model.score(X_test, y_test)
 # %%
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestClassifier
+
 np.random.seed(42)
 
 X = heart_disease.drop('target', axis=1)
@@ -904,6 +914,7 @@ fpr
 # Create a function for plotting ROC curves
 import matplotlib.pyplot as plt
 
+
 def plot_roc_curve(fpr, tpr):
     '''
     Plots a ROC curve given the false positive rate (fpr)
@@ -911,24 +922,23 @@ def plot_roc_curve(fpr, tpr):
     '''
     # Plot roc 
     plt.plot(fpr, tpr, color='orange', label='ROC')
-    
+
     # Plot line with no predictive power (baseline) 繪製一條沒有進行預測的基準線來比較
     plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--', label='Guessing')
-    
+
     # Customize the plot
     plt.xlabel('False positive rate (fpr)')
     plt.ylabel('True positive rate (tpr)')
     plt.title('Receiver Operating Characteristic (ROC) Curve')
     plt.legend()
     plt.show()
-    
+
+
 plot_roc_curve(fpr, tpr)
-
-
-
 
 # %%
 from sklearn.metrics import roc_auc_score
+
 roc_auc_score(y_test, y_probs_positive)
 
 # %%
@@ -959,9 +969,9 @@ confusion_matrix(y_test, y_preds)
 # %%
 # Visualize confusion matrix with pd.crosstab()
 pd.crosstab(y_test,
-           y_preds,
-           rownames=['Actual Labels'],
-           colnames=['Predicted Labels'])
+            y_preds,
+            rownames=['Actual Labels'],
+            colnames=['Predicted Labels'])
 
 # %%
 # install seaborn
@@ -992,16 +1002,18 @@ def plot_conf_mat(conf_mat):
     '''
     fig, ax = plt.subplots(figsize=(3, 3))
     ax = sns.heatmap(conf_mat,
-                    annot=True, # Annotate the boxes with conf_mat info
+                     annot=True,  # Annotate the boxes with conf_mat info
                      cbar=False)
     plt.xlabel('Predicted label')
     plt.ylabel('True label');
+
 
 plot_conf_mat(conf_mat)
 
 
 # %%
 from sklearn.metrics import plot_confusion_matrix
+
 plot_confusion_matrix(clf, X_test, y_test);
 
 # %% [markdown]
@@ -1029,13 +1041,13 @@ print(classification_report(y_test, y_preds))
 # %%
 # Where precision and recall become valuable
 disease_true = np.zeros(10000)
-disease_true[0] = 1 # only one positive case
+disease_true[0] = 1  # only one positive case
 
-disease_preds = np.zeros(10000) # model predicts every case as 0
+disease_preds = np.zeros(10000)  # model predicts every case as 0
 
 pd.DataFrame(classification_report(disease_true,
-                                  disease_preds,
-                                  output_dict=True))
+                                   disease_preds,
+                                   output_dict=True))
 
 # %% [markdown]
 # To summarize classification metrics:
@@ -1072,6 +1084,7 @@ pd.DataFrame(classification_report(disease_true,
 
 # %%
 from sklearn.ensemble import RandomForestRegressor
+
 np.random.seed(42)
 
 X = boston_df.drop('target', axis=1)
@@ -1113,7 +1126,7 @@ r2_score(y_test, y_test)
 y_preds = model.predict(X_test)
 mae = mean_absolute_error(y_test, y_preds)
 df = pd.DataFrame(data={'actual values': y_test,
-                       'predicted values': y_preds})
+                        'predicted values': y_preds})
 df['differences'] = abs(df['predicted values'] - df['actual values'])
 df
 
@@ -1123,6 +1136,7 @@ df
 # %%
 # Mean Squared error
 from sklearn.metrics import mean_squared_error
+
 mse = mean_squared_error(y_test, y_preds)
 mse
 
@@ -1136,6 +1150,7 @@ squared.mean()
 # %%
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestClassifier
+
 np.random.seed(42)
 
 X = heart_disease.drop('target', axis=1)
@@ -1176,6 +1191,7 @@ np.mean(cv_f1)
 # %%
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
+
 np.random.seed(42)
 X = boston_df.drop('target', axis=1)
 y = boston_df['target']
@@ -1291,4 +1307,316 @@ from sklearn.ensemble import RandomForestClassifier
 clf = RandomForestClassifier()
 clf.get_params()
 
+
+# %% [markdown]
+# ### 5.1 Tuning hyperparameters by hand
+# Let's make 3 sets, training, validation and test.
+
+# %% [markdown]
+# We're going to try and adjust:
+# * `max_depth`
+# * `max_features`
+# * `min_simples_leaf`
+# * `min_samples_split`
+# * `n_estimators`
+
 # %%
+def evaluate_preds(y_true, y_preds):
+    '''
+    Performs evaluation comparison on y_true labels vs. y_pred labels
+    on a classification.
+    '''
+    accuracy = accuracy_score(y_true, y_preds)
+    precision = precision_score(y_true, y_preds)
+    recall = recall_score(y_true, y_preds)
+    f1 = f1_score(y_true, y_preds)
+    metric_dict = {'accuracy': round(accuracy, 2),
+                   'precision': round(precision, 2),
+                   'recall': round(recall, 2),
+                   'f1': round(f1, 2)}
+    print(f'Acc: {accuracy * 100:.2f}%')
+    print(f'Precision: {precision:.2f}')
+    print(f'Recall: {recall:.2f}')
+    print(f'F1 score: {f1:.2f}')
+    return metric_dict
+
+
+# %%
+from sklearn.ensemble import RandomForestClassifier
+
+np.random.seed(42)
+
+# Shuffle the data
+heart_disease_shuffled = heart_disease.sample(frac=1)
+
+# Split into X & y
+X = heart_disease_shuffled.drop('target', axis=1)
+y = heart_disease_shuffled['target']
+
+# Split the data into train, validation & test sets
+train_split = round(0.7 * len(heart_disease_shuffled))  # 70% of data
+valid_split = round(train_split + 0.15 * len(heart_disease_shuffled))  # 15% of data
+X_train, y_train = X[:train_split], y[:train_split]
+X_valid, y_valid = X[train_split:valid_split], y[train_split:valid_split]
+X_test, y_test = X[valid_split:], y[valid_split:]
+
+clf = RandomForestClassifier()
+
+# %%
+# 查看初始化的預設參數
+clf.get_params()
+
+# %%
+np.random.seed(42)
+clf.fit(X_train, y_train)
+# Make baseline predictions
+y_preds = clf.predict(X_valid)
+
+# Evaluate the classifier on validation set
+baseline_metrics = evaluate_preds(y_valid, y_preds)
+
+# %% [markdown]
+# ### 5.2 Hyperparameter tuning with RandomizedSearchCV
+# 會將grid中的所有組合做隨機嘗試
+
+# %%
+from sklearn.model_selection import RandomizedSearchCV
+
+grid = {'n_estimators': [10, 100, 200, 500, 1000, 1200],
+       'max_depth': [None, 5, 10, 20, 30],
+       'max_features': ['auto', 'sqrt'],
+       'min_samples_split': [2, 4, 6],
+       'min_samples_leaf': [1, 2, 4]}
+np.random.seed(42)
+# Split into X & y
+X = heart_disease_shuffled.drop('target', axis=1)
+y = heart_disease_shuffled['target']
+
+train_split = round(0.7 * len(heart_disease_shuffled))
+valid_split = round(0.15 * len(heart_disease_shuffled) + train_split)
+X_train, y_train = X[:train_split], y[:train_split]
+X_valid, y_valid = X[train_split:train_split], y[train_split:valid_split]
+X_test, y_test = X[valid_split:], y[valid_split:]
+
+# Instantiate RandomForestClassifier
+clf = RandomForestClassifier(n_jobs=1)
+
+# Setup RandomizedSearchCV
+rs_clf = RandomizedSearchCV(estimator=clf,
+                            param_distributions=grid,
+                            n_iter=1, # number of models to try
+                            cv=2,
+                            verbose=2,
+                            random_state=42, # set random_state to 42 for reproducibility
+                            refit=True) # set refit=True (default) to refit the best model on the full dataset 
+# 隨機測試次數為 n_iter * cv
+# n_iter 迴圈次數
+# cv 資料分割為幾分
+# Fit the RandomizedSearchVC version of clf
+rs_clf.fit(X_train, y_train)
+
+# %%
+rs_clf.best_params_
+
+# %%
+# Make predictions with the best hyperparameters
+rs_y_preds = rs_clf.predict(X_test)
+
+# Evaluate the predictions
+rs_metrics = evaluate_preds(y_test, rs_y_preds)
+
+# %% [markdown]
+# ### 5.3 Hyperparameter tuning with GridSearchCV
+# 會將grid中的所有組合都做嘗試
+
+# %%
+grid
+
+# %%
+6*5*2*3*3
+
+# %%
+grid_2 = {'n_estimators': [100, 200, 500],
+         'max_depth': [None],
+         'max_features': ['auto', 'sqrt'],
+         'min_samples_split': [6],
+         'min_samples_leaf': [1, 2]}
+
+# %%
+from sklearn.model_selection import GridSearchCV, train_test_split
+np.random.seed(42)
+# Split into X & y
+X = heart_disease_shuffled.drop('target', axis=1)
+y = heart_disease_shuffled['target']
+
+train_split = round(0.7 * len(heart_disease_shuffled))
+valid_split = round(0.15 * len(heart_disease_shuffled) + train_split)
+X_train, y_train = X[:train_split], y[:train_split]
+X_valid, y_valid = X[train_split:train_split], y[train_split:valid_split]
+X_test, y_test = X[valid_split:], y[valid_split:]
+
+# Instantiate RandomForestClassifier
+clf = RandomForestClassifier(n_jobs=1)
+
+# Setup GridSearchCV
+gs_clf = GridSearchCV(estimator=clf,
+                      param_grid=grid_2,
+                      cv=2,
+                      verbose=2,
+                      refit=True
+                     ) # set refit=True (default) to refit the best model on the full dataset
+                     
+# 測試次數為 param_grid 所有排列組合 * cv
+
+# Fit the RandomizedSearchVC version of clf
+gs_clf.fit(X_train, y_train)
+
+# %%
+gs_clf.best_params_
+
+# %%
+gs_y_preds = gs_clf.predict(X_test)
+
+# evaluate the predictions
+gs_metrics = evaluate_preds(y_test, gs_y_preds)
+
+# %%
+compare_metrics = pd.DataFrame({'baseline': baseline_metrics,
+                              'random search': rs_metrics,
+                               'grid search': gs_metrics})
+compare_metrics.plot.bar(figsize=(10, 8))
+compare_metrics
+
+# %% [markdown]
+# ### 6. Saving and loading trained machine learning models
+# Two ways to sava and load machine learning models:
+# 1. With Python's `pickle` module
+# 2. With the `joblib` module    
+#   
+#
+# **Pickle**
+#
+
+# %%
+import pickle
+
+# Save an extisting model to file
+pickle.dump(gs_clf, open('gs_random_random_forest_codel_1.pkl', 'wb'))
+
+# Load a saved model 
+loaded_pickle_model = pickle.load(open('gs_random_random_forest_codel_1.pkl', 'rb'))
+
+# Make some predictions
+pickle_y_preds = loaded_pickle_model.predict(X_test)
+evaluate_preds(y_test, pickle_y_preds)
+
+
+
+# %% [markdown]
+# **Joblib**
+
+# %%
+from joblib import dump, load
+
+# Save model to file
+dump(gs_clf, filename='gs_random_forest_model_1.joblib')
+
+# %%
+# Import a saved joblib model
+loaded_joblib_model = load(filename='gs_random_forest_model_1.joblib')
+
+# %%
+# Make and evaluate joblib predictions
+joblib_y_preds = loaded_joblib_model.predict(X_test)
+evaluate_preds(y_test, joblib_y_preds)
+
+# %% [markdown]
+# ### 7.Putting it all together!
+# **Step we want to do (all in one all)**
+# 1. Fill missing data
+# 2. Convert data to numbers
+# 3. Build a model on the data
+
+# %%
+data = pd.read_csv('../source/car-sales-extended-missing-data.csv')
+data
+
+# %%
+data.dtypes
+
+# %%
+data.isna().sum()
+
+# %%
+# Getting data ready
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+
+# Mpdelling
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split, GridSearchCV
+
+# Setup random seed
+import numpy as np 
+np.random.seed(42)
+
+# Import data and drop rows with missing labels (沒有label就無法訓練所以drop)
+data = pd.read_csv('../source/car-sales-extended-missing-data.csv')
+data.dropna(subset=['Price'], inplace=True)
+
+# Define different features and transformer pipeline
+categorical_features = ['Make', 'Colour']
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+
+door_feature = ['Doors']
+door_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='constant', fill_value=4))
+])
+numeric_features = ['Odometer (KM)']
+numertic_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean'))  
+])
+    
+# Setup preprocessing steps (fill missing values, then convert to number)
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('cat', categorical_transformer, categorical_features),
+        ('door', door_transformer, door_feature),
+        ('num', numertic_transformer, numeric_features)
+    ])
+
+# Creating a preprocessing and modelling pipeline
+model = Pipeline(steps=[('preprocessor', preprocessor),
+                       ('model', RandomForestRegressor())])
+
+# Split data
+X = data.drop('Price', axis=1)
+y = data['Price']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Fit and score the model
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+
+# %% [markdown]
+# It's also possible to use `GridSearchCV` or `RandomizedSesrchCV` with our `Pipeline`.
+
+# %%
+# Use GridSearchCV with our regression Pipeline
+pipe_grid = {
+    'preprocessor__num__imputer__strategy': ['mean', 'median'], # preprocessor.num.imputer.strategy
+    'model__n_estimators': [100, 1000],
+    'model__max_depth': [None, 5],
+    'model__max_features': ['auto'],
+    'model__min_samples_split': [2, 4]
+}
+
+gs_model = GridSearchCV(model, pipe_grid, cv=5, verbose=2)
+
+# %%
+gs_model.fit(X_train, y_train)
